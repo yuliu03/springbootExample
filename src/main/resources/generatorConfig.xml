@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <classPathEntry location="D:\workUtil\repo\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar" />
+    <!-- mvn mybatis-generator:generate -->
+    <context id="oneHour" targetRuntime="org.mybatis.generator.IntrospectedTableMyBatis3Ext">
+        <property name="suppressAllComments" value="mvn " />
+        <property name="useActualColumnNames" value="false" />
+        <!-- 配置插件 -->
+        <plugin type="org.mybatis.generator.MysqlPaginationPlugin" />
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--数据库连接驱动类,URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1/base_mall" userId="root" password="root">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成(实体)模型的包名和位置,controller层生成,service层生成-->
+        <javaModelGenerator targetPackage="com.common.dao.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <!--&lt;!&ndash;controller 和 service 辅助参数&ndash;&gt;-->
+            <!--<property name="daoDir" value="com.common.dao.mapper"/>-->
+            <!--<property name="APIResponseDir" value="com.scrapy.helloscrapy.common.APIResponse"/>-->
+            <!--&lt;!&ndash;controller层生成&ndash;&gt;-->
+            <!--<property name="controllerPackageDir" value="com.scrapy.helloscrapy.controller"/>-->
+            <!--&lt;!&ndash;service interface层生成&ndash;&gt;-->
+            <!--<property name="serviceInterfacePackageDir" value="com.scrapy.helloscrapy.service"/>-->
+            <!--&lt;!&ndash;service implement interface层生成&ndash;&gt;-->
+            <!--<property name="serviceImpPackageDir" value="com.scrapy.helloscrapy.service.impl"/>-->
+        </javaModelGenerator>
+        <!-- 生成XML映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="resources.mapper" targetProject="src/main">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO接口的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.common.dao.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <!--<table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="menu" domainObjectName="Menu" enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="role" domainObjectName="Role" enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="role_menu" domainObjectName="RoleMenu" enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="role_user" domainObjectName="RoleUser" enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <table tableName="test" domainObjectName="Test" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
+    </context>
+</generatorConfiguration>

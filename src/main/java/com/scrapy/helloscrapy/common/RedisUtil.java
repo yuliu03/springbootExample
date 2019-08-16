@@ -40,7 +40,8 @@ public final class RedisUtil {
      */
     public boolean hasKey(String key) {
         try {
-            return redisTemplate.hasKey(key);
+            Boolean flag = redisTemplate.hasKey(key);
+            return flag;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -390,6 +391,19 @@ public final class RedisUtil {
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    /**
+     * 普通缓存放入 @param key   键 @param value 值 @return true成功 false失败
+     */
+    public Object setAndReturn(String key, Object value) {
+        try {
+            redisTemplate.opsForValue().set(key, value);
+            return value;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
