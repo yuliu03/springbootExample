@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.common.dao.mapper.MenuMapperExt" >
+  <resultMap id="BaseResultMap" type="com.common.dao.entity.Menu" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="nav_level" property="navLevel" jdbcType="INTEGER" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="is_leaf" property="isLeaf" jdbcType="INTEGER" />
+    <result column="sort_code" property="sortCode" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uuid, menu_id, pid, menu_name, nav_level, file_url, is_del, is_leaf, sort_code, version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from menu
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.common.dao.entity.Menu" >
+    insert into menu (uuid, menu_id, pid, 
+      menu_name, nav_level, file_url, 
+      is_del, is_leaf, sort_code, 
+      version)
+    values (#{uuid,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
+      #{menuName,jdbcType=VARCHAR}, #{navLevel,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=INTEGER}, #{isLeaf,jdbcType=INTEGER}, #{sortCode,jdbcType=INTEGER}, 
+      #{version,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.common.dao.entity.Menu" >
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="navLevel != null" >
+        nav_level,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="isLeaf != null" >
+        is_leaf,
+      </if>
+      <if test="sortCode != null" >
+        sort_code,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="navLevel != null" >
+        #{navLevel,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=INTEGER},
+      </if>
+      <if test="sortCode != null" >
+        #{sortCode,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.dao.entity.Menu" >
+    update menu
+    <set >
+      <if test="menuId != null" >
+        menu_id = #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="navLevel != null" >
+        nav_level = #{navLevel,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="isLeaf != null" >
+        is_leaf = #{isLeaf,jdbcType=INTEGER},
+      </if>
+      <if test="sortCode != null" >
+        sort_code = #{sortCode,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.common.dao.entity.Menu" >
+    update menu
+    set menu_id = #{menuId,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      nav_level = #{navLevel,jdbcType=INTEGER},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=INTEGER},
+      is_leaf = #{isLeaf,jdbcType=INTEGER},
+      sort_code = #{sortCode,jdbcType=INTEGER},
+      version = #{version,jdbcType=DECIMAL}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

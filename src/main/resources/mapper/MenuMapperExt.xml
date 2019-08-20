@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.common.dao.mapper.MenuMapperExt" >
+  <resultMap id="ResultMapExt" type="com.common.dao.entity.entityJsonBean.MenuJsonBean" extends="BaseResultMap">
+  </resultMap>
+
+  <!-- 扩展自动生成或自定义的SQl语句写在此文件中 -->
+  <sql id="sql_condition" >
+    <if test="uuid != null and uuid != '' " >
+      and uuid= #{uuid,jdbcType = VARCHAR}
+    </if>
+    <if test="menuId != null and menuId != '' " >
+      and menu_id= #{menuId,jdbcType = VARCHAR}
+    </if>
+    <if test="pid != null and pid != '' " >
+      and pid= #{pid,jdbcType = VARCHAR}
+    </if>
+    <if test="menuName != null and menuName != '' " >
+      and menu_name= #{menuName,jdbcType = VARCHAR}
+    </if>
+    <if test="navLevel != null and navLevel != '' " >
+      and nav_level= #{navLevel,jdbcType = INTEGER}
+    </if>
+    <if test="fileUrl != null and fileUrl != '' " >
+      and file_url= #{fileUrl,jdbcType = VARCHAR}
+    </if>
+    <if test="isDel != null and isDel != '' " >
+      and is_del= #{isDel,jdbcType = INTEGER}
+    </if>
+    <if test="isLeaf != null and isLeaf != '' " >
+      and is_leaf= #{isLeaf,jdbcType = INTEGER}
+    </if>
+    <if test="sortCode != null and sortCode != '' " >
+      and sort_code= #{sortCode,jdbcType = INTEGER}
+    </if>
+    <if test="version != null and version != '' " >
+      and version= #{version,jdbcType = DECIMAL}
+    </if>
+  </sql>
+  <select id="selectList" parameterType="com.common.dao.entity.Menu" resultMap="ResultMapExt" >
+    select
+    <include refid="Base_Column_List" />
+    from menu
+    <trim prefix="WHERE" prefixOverrides="AND" >
+      <include refid="sql_condition" />
+    </trim>
+  </select>
+</mapper>
