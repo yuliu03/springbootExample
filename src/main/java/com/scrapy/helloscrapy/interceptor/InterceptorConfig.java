@@ -14,7 +14,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(timeInteceptor).addPathPatterns("/**")
-                .excludePathPatterns("/user/login");
+                .excludePathPatterns("/User/login").excludePathPatterns("/Menu/selectList");
     }
 
     /*
@@ -28,6 +28,4 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "DELETE", "PUT","OPTIONS")
                 .maxAge(3600);
     }
-
-
 }

@@ -70,7 +70,7 @@ public class TimeInteceptor  implements HandlerInterceptor{
 
         RedisUtil redisUtil = SpringUtils.getBean(RedisUtil.class);
         //权限路径拦截
-        if(!redisUtil.hasKey(GlobalConfigParam.TOKEN+token)){
+        if(!redisUtil.hasKey(token)){
             response.setContentType("text/html; charset=utf-8");
             PrintWriter writer = response.getWriter();
             writer.print(JSONObject.toJSONString(new APIResponse("1001",null,"token超时")));

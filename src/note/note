@@ -1,2 +1,10 @@
 1. el problema que he encontrado es que el error notifica que no encuentre cierto fichero. La solucion es que no se han escanedo
    tal fichero.
+
+2. el en nivel de control, el tipo de paramentro que recibe debe concordar con el tipo que se envia desde web, sino no se puede filtrar
+
+3. la sentencia de sql, si el tipo de resultado es un tipo de clase, normalmente se usa resultMap, que esta declarado en el mapper.xml con
+una referencia apuntada a la direccion de la clase java
+
+4. OPTION es un prepedido de post o get para la connction.
+5. el tipo de dato que se envia desde web afecta a los parametros de las funciones de controller nivel, no se evita con el nivel de interceptor
