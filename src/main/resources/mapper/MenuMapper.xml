@@ -12,9 +12,11 @@
     <result column="is_leaf" property="isLeaf" jdbcType="INTEGER" />
     <result column="sort_code" property="sortCode" jdbcType="INTEGER" />
     <result column="version" property="version" jdbcType="DECIMAL" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    uuid, menu_id, pid, menu_name, nav_level, file_url, is_del, is_leaf, sort_code, version
+    uuid, menu_id, pid, menu_name, nav_level, file_url, is_del, is_leaf, sort_code, version, 
+    icon
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -30,11 +32,11 @@
     insert into menu (uuid, menu_id, pid, 
       menu_name, nav_level, file_url, 
       is_del, is_leaf, sort_code, 
-      version)
+      version, icon)
     values (#{uuid,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
       #{menuName,jdbcType=VARCHAR}, #{navLevel,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, 
       #{isDel,jdbcType=INTEGER}, #{isLeaf,jdbcType=INTEGER}, #{sortCode,jdbcType=INTEGER}, 
-      #{version,jdbcType=DECIMAL})
+      #{version,jdbcType=DECIMAL}, #{icon,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.common.dao.entity.Menu" >
     insert into menu
@@ -69,6 +71,9 @@
       <if test="version != null" >
         version,
       </if>
+      <if test="icon != null" >
+        icon,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
@@ -100,6 +105,9 @@
       </if>
       <if test="version != null" >
         #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -133,6 +141,9 @@
       <if test="version != null" >
         version = #{version,jdbcType=DECIMAL},
       </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
@@ -146,7 +157,8 @@
       is_del = #{isDel,jdbcType=INTEGER},
       is_leaf = #{isLeaf,jdbcType=INTEGER},
       sort_code = #{sortCode,jdbcType=INTEGER},
-      version = #{version,jdbcType=DECIMAL}
+      version = #{version,jdbcType=DECIMAL},
+      icon = #{icon,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

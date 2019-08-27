@@ -1,7 +1,6 @@
 package com.scrapy.helloscrapy.service;
 import com.common.dao.entity.Menu;
 import com.scrapy.helloscrapy.common.APIResponse;
-import java.util.List;
 
 public interface MenuService {
     APIResponse deleteByPrimaryKey(Menu record);

@@ -33,6 +33,9 @@ public class Menu {
     //version
     private BigDecimal version;
 
+    //图标
+    private String icon;
+
     public String getUuid() {
         return uuid;
     }
@@ -111,5 +114,13 @@ public class Menu {
 
     public void setVersion(BigDecimal version) {
         this.version = version;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
     }
 }

@@ -36,6 +36,9 @@
     <if test="version != null and version != '' " >
       and version= #{version,jdbcType = DECIMAL}
     </if>
+    <if test="icon != null and icon != '' " >
+      icon = #{icon,jdbcType=VARCHAR},
+    </if>
   </sql>
   <select id="selectList" parameterType="com.common.dao.entity.Menu" resultMap="ResultMapExt" >
     select

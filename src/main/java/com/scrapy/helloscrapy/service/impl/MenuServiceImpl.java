@@ -4,8 +4,6 @@ import com.common.dao.entity.entityJsonBean.MenuJsonBean;
 import com.common.dao.mapper.MenuMapperExt;
 import com.scrapy.helloscrapy.common.APIResponse;
 import com.scrapy.helloscrapy.service.MenuService;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

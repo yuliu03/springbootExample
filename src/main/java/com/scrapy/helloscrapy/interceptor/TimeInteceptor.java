@@ -65,6 +65,7 @@ public class TimeInteceptor  implements HandlerInterceptor{
             writer.print(JSONObject.toJSONString(new APIResponse("1000",null,"token未检测到")));
             writer.close();
             response.flushBuffer();
+            System.out.println("token error");
             return false;
         }
 
