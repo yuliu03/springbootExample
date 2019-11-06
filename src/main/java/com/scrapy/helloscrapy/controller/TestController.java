@@ -44,4 +44,9 @@ class TestController {
     public APIResponse selectList(HttpServletRequest request, HttpSession session, @RequestBody Test record) {
         APIResponse apiResponse = testService.selectList(record);return apiResponse;
     }
+
+    @RequestMapping(value = "test",method = RequestMethod.POST)
+    public APIResponse test(HttpServletRequest request, HttpSession session, @RequestBody Test record) {
+        return new APIResponse("test");
+    }
 }

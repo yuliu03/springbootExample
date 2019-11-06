@@ -2,105 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.common.dao.mapper.TestMapperExt" >
   <resultMap id="BaseResultMap" type="com.common.dao.entity.Test" >
-    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
-    <result column="test_id" property="testId" jdbcType="VARCHAR" />
-    <result column="version" property="version" jdbcType="INTEGER" />
-    <result column="is_del" property="isDel" jdbcType="INTEGER" />
-    <result column="search_key" property="searchKey" jdbcType="VARCHAR" />
-    <result column="sort_code" property="sortCode" jdbcType="INTEGER" />
+    <id column="test_id" property="testId" jdbcType="VARCHAR" />
+    <result column="test_name" property="testName" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    uuid, test_id, version, is_del, search_key, sort_code
+    test_id, test_name, is_del, uuid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from test
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    where test_id = #{testId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from test
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    where test_id = #{testId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.common.dao.entity.Test" >
-    insert into test (uuid, test_id, version, 
-      is_del, search_key, sort_code
-      )
-    values (#{uuid,jdbcType=VARCHAR}, #{testId,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
-      #{isDel,jdbcType=INTEGER}, #{searchKey,jdbcType=VARCHAR}, #{sortCode,jdbcType=INTEGER}
-      )
+    insert into test (test_id, test_name, is_del, 
+      uuid)
+    values (#{testId,jdbcType=VARCHAR}, #{testName,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, 
+      #{uuid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.common.dao.entity.Test" >
     insert into test
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        uuid,
-      </if>
       <if test="testId != null" >
         test_id,
       </if>
-      <if test="version != null" >
-        version,
+      <if test="testName != null" >
+        test_name,
       </if>
       <if test="isDel != null" >
         is_del,
       </if>
-      <if test="searchKey != null" >
-        search_key,
-      </if>
-      <if test="sortCode != null" >
-        sort_code,
+      <if test="uuid != null" >
+        uuid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uuid != null" >
-        #{uuid,jdbcType=VARCHAR},
-      </if>
       <if test="testId != null" >
         #{testId,jdbcType=VARCHAR},
       </if>
-      <if test="version != null" >
-        #{version,jdbcType=INTEGER},
+      <if test="testName != null" >
+        #{testName,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null" >
-        #{isDel,jdbcType=INTEGER},
+        #{isDel,jdbcType=BIT},
       </if>
-      <if test="searchKey != null" >
-        #{searchKey,jdbcType=VARCHAR},
-      </if>
-      <if test="sortCode != null" >
-        #{sortCode,jdbcType=INTEGER},
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.common.dao.entity.Test" >
     update test
     <set >
-      <if test="testId != null" >
-        test_id = #{testId,jdbcType=VARCHAR},
-      </if>
-      <if test="version != null" >
-        version = #{version,jdbcType=INTEGER},
+      <if test="testName != null" >
+        test_name = #{testName,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null" >
-        is_del = #{isDel,jdbcType=INTEGER},
+        is_del = #{isDel,jdbcType=BIT},
       </if>
-      <if test="searchKey != null" >
-        search_key = #{searchKey,jdbcType=VARCHAR},
-      </if>
-      <if test="sortCode != null" >
-        sort_code = #{sortCode,jdbcType=INTEGER},
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
       </if>
     </set>
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    where test_id = #{testId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.common.dao.entity.Test" >
     update test
-    set test_id = #{testId,jdbcType=VARCHAR},
-      version = #{version,jdbcType=INTEGER},
-      is_del = #{isDel,jdbcType=INTEGER},
-      search_key = #{searchKey,jdbcType=VARCHAR},
-      sort_code = #{sortCode,jdbcType=INTEGER}
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    set test_name = #{testName,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT},
+      uuid = #{uuid,jdbcType=VARCHAR}
+    where test_id = #{testId,jdbcType=VARCHAR}
   </update>
 </mapper>

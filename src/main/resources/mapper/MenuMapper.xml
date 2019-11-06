@@ -4,19 +4,23 @@
   <resultMap id="BaseResultMap" type="com.common.dao.entity.Menu" >
     <id column="uuid" property="uuid" jdbcType="VARCHAR" />
     <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
-    <result column="pid" property="pid" jdbcType="VARCHAR" />
     <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
-    <result column="nav_level" property="navLevel" jdbcType="INTEGER" />
-    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
-    <result column="is_del" property="isDel" jdbcType="INTEGER" />
-    <result column="is_leaf" property="isLeaf" jdbcType="INTEGER" />
-    <result column="sort_code" property="sortCode" jdbcType="INTEGER" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+    <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="version" property="version" jdbcType="DECIMAL" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="is_leaf" property="isLeaf" jdbcType="BIT" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="ext" property="ext" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    uuid, menu_id, pid, menu_name, nav_level, file_url, is_del, is_leaf, sort_code, version, 
-    icon
+    uuid, menu_id, menu_name, created_by, updated_time, updated_by, created_time, remark, 
+    version, is_del, pid, is_leaf, file_url, icon, ext
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -29,14 +33,16 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.common.dao.entity.Menu" >
-    insert into menu (uuid, menu_id, pid, 
-      menu_name, nav_level, file_url, 
-      is_del, is_leaf, sort_code, 
-      version, icon)
-    values (#{uuid,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
-      #{menuName,jdbcType=VARCHAR}, #{navLevel,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, 
-      #{isDel,jdbcType=INTEGER}, #{isLeaf,jdbcType=INTEGER}, #{sortCode,jdbcType=INTEGER}, 
-      #{version,jdbcType=DECIMAL}, #{icon,jdbcType=VARCHAR})
+    insert into menu (uuid, menu_id, menu_name, 
+      created_by, updated_time, updated_by, 
+      created_time, remark, version, 
+      is_del, pid, is_leaf, file_url, 
+      icon, ext)
+    values (#{uuid,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{version,jdbcType=DECIMAL}, 
+      #{isDel,jdbcType=BIT}, #{pid,jdbcType=VARCHAR}, #{isLeaf,jdbcType=BIT}, #{fileUrl,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{ext,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.common.dao.entity.Menu" >
     insert into menu
@@ -47,32 +53,44 @@
       <if test="menuId != null" >
         menu_id,
       </if>
-      <if test="pid != null" >
-        pid,
-      </if>
       <if test="menuName != null" >
         menu_name,
       </if>
-      <if test="navLevel != null" >
-        nav_level,
+      <if test="createdBy != null" >
+        created_by,
       </if>
-      <if test="fileUrl != null" >
-        file_url,
+      <if test="updatedTime != null" >
+        updated_time,
       </if>
-      <if test="isDel != null" >
-        is_del,
+      <if test="updatedBy != null" >
+        updated_by,
       </if>
-      <if test="isLeaf != null" >
-        is_leaf,
+      <if test="createdTime != null" >
+        created_time,
       </if>
-      <if test="sortCode != null" >
-        sort_code,
+      <if test="remark != null" >
+        remark,
       </if>
       <if test="version != null" >
         version,
       </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="isLeaf != null" >
+        is_leaf,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
       <if test="icon != null" >
         icon,
+      </if>
+      <if test="ext != null" >
+        ext,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -82,32 +100,44 @@
       <if test="menuId != null" >
         #{menuId,jdbcType=VARCHAR},
       </if>
-      <if test="pid != null" >
-        #{pid,jdbcType=VARCHAR},
-      </if>
       <if test="menuName != null" >
         #{menuName,jdbcType=VARCHAR},
       </if>
-      <if test="navLevel != null" >
-        #{navLevel,jdbcType=INTEGER},
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
       </if>
-      <if test="fileUrl != null" >
-        #{fileUrl,jdbcType=VARCHAR},
+      <if test="updatedTime != null" >
+        #{updatedTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="isDel != null" >
-        #{isDel,jdbcType=INTEGER},
+      <if test="updatedBy != null" >
+        #{updatedBy,jdbcType=VARCHAR},
       </if>
-      <if test="isLeaf != null" >
-        #{isLeaf,jdbcType=INTEGER},
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="sortCode != null" >
-        #{sortCode,jdbcType=INTEGER},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="version != null" >
         #{version,jdbcType=DECIMAL},
       </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=BIT},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
       <if test="icon != null" >
         #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        #{ext,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -117,32 +147,44 @@
       <if test="menuId != null" >
         menu_id = #{menuId,jdbcType=VARCHAR},
       </if>
-      <if test="pid != null" >
-        pid = #{pid,jdbcType=VARCHAR},
-      </if>
       <if test="menuName != null" >
         menu_name = #{menuName,jdbcType=VARCHAR},
       </if>
-      <if test="navLevel != null" >
-        nav_level = #{navLevel,jdbcType=INTEGER},
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
       </if>
-      <if test="fileUrl != null" >
-        file_url = #{fileUrl,jdbcType=VARCHAR},
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="isDel != null" >
-        is_del = #{isDel,jdbcType=INTEGER},
+      <if test="updatedBy != null" >
+        updated_by = #{updatedBy,jdbcType=VARCHAR},
       </if>
-      <if test="isLeaf != null" >
-        is_leaf = #{isLeaf,jdbcType=INTEGER},
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="sortCode != null" >
-        sort_code = #{sortCode,jdbcType=INTEGER},
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="version != null" >
         version = #{version,jdbcType=DECIMAL},
       </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null" >
+        is_leaf = #{isLeaf,jdbcType=BIT},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
       <if test="icon != null" >
         icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        ext = #{ext,jdbcType=VARCHAR},
       </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
@@ -150,15 +192,19 @@
   <update id="updateByPrimaryKey" parameterType="com.common.dao.entity.Menu" >
     update menu
     set menu_id = #{menuId,jdbcType=VARCHAR},
-      pid = #{pid,jdbcType=VARCHAR},
       menu_name = #{menuName,jdbcType=VARCHAR},
-      nav_level = #{navLevel,jdbcType=INTEGER},
-      file_url = #{fileUrl,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=INTEGER},
-      is_leaf = #{isLeaf,jdbcType=INTEGER},
-      sort_code = #{sortCode,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
       version = #{version,jdbcType=DECIMAL},
-      icon = #{icon,jdbcType=VARCHAR}
+      is_del = #{isDel,jdbcType=BIT},
+      pid = #{pid,jdbcType=VARCHAR},
+      is_leaf = #{isLeaf,jdbcType=BIT},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

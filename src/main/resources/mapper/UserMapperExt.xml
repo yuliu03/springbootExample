@@ -6,14 +6,14 @@
     <if test="userId != null and userId != '' " >
       and user_id= #{userId,jdbcType = VARCHAR}
     </if>
+    <if test="uuid != null and uuid != '' " >
+      and uuid= #{uuid,jdbcType = VARCHAR}
+    </if>
     <if test="userFullName != null and userFullName != '' " >
       and user_full_name= #{userFullName,jdbcType = VARCHAR}
     </if>
-    <if test="password != null and password != '' " >
-      and password= #{password,jdbcType = VARCHAR}
-    </if>
     <if test="isDel != null and isDel != '' " >
-      and is_del= #{isDel,jdbcType = INTEGER}
+      and is_del= #{isDel,jdbcType = BIT}
     </if>
     <if test="version != null and version != '' " >
       and version= #{version,jdbcType = INTEGER}
@@ -22,19 +22,25 @@
       and created_by= #{createdBy,jdbcType = VARCHAR}
     </if>
     <if test="updatedTime != null and updatedTime != '' " >
-      and updated_time= #{updatedTime,jdbcType = VARCHAR}
+      and updated_time= #{updatedTime,jdbcType = TIMESTAMP}
     </if>
     <if test="updatedBy != null and updatedBy != '' " >
       and updated_by= #{updatedBy,jdbcType = VARCHAR}
     </if>
     <if test="createdTime != null and createdTime != '' " >
-      and created_time= #{createdTime,jdbcType = VARCHAR}
+      and created_time= #{createdTime,jdbcType = TIMESTAMP}
     </if>
     <if test="remark != null and remark != '' " >
       and remark= #{remark,jdbcType = VARCHAR}
     </if>
-    <if test="uuid != null and uuid != '' " >
-      and uuid= #{uuid,jdbcType = VARCHAR}
+    <if test="menuId != null and menuId != '' " >
+      and menu_id= #{menuId,jdbcType = VARCHAR}
+    </if>
+    <if test="ext != null and ext != '' " >
+      and ext= #{ext,jdbcType = VARCHAR}
+    </if>
+    <if test="password != null and password != '' " >
+      and password= #{password,jdbcType = VARCHAR}
     </if>
   </sql>
   <select id="selectList" parameterType="com.common.dao.entity.User" resultMap="BaseResultMap" >

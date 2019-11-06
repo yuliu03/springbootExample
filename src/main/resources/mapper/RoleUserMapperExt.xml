@@ -6,32 +6,41 @@
     <if test="uuid != null and uuid != '' " >
       and uuid= #{uuid,jdbcType = VARCHAR}
     </if>
-    <if test="roleUserId != null and roleUserId != '' " >
-      and role_user_id= #{roleUserId,jdbcType = VARCHAR}
+    <if test="userRoleId != null and userRoleId != '' " >
+      and user_role_id= #{userRoleId,jdbcType = VARCHAR}
     </if>
-    <if test="userId != null and userId != '' " >
-      and user_id= #{userId,jdbcType = VARCHAR}
-    </if>
-    <if test="roleId != null and roleId != '' " >
-      and role_id= #{roleId,jdbcType = VARCHAR}
+    <if test="userRoleName != null and userRoleName != '' " >
+      and user_role_name= #{userRoleName,jdbcType = VARCHAR}
     </if>
     <if test="createdBy != null and createdBy != '' " >
       and created_by= #{createdBy,jdbcType = VARCHAR}
     </if>
-    <if test="createdTime != null and createdTime != '' " >
-      and created_time= #{createdTime,jdbcType = VARCHAR}
+    <if test="updatedTime != null and updatedTime != '' " >
+      and updated_time= #{updatedTime,jdbcType = TIMESTAMP}
     </if>
     <if test="updatedBy != null and updatedBy != '' " >
       and updated_by= #{updatedBy,jdbcType = VARCHAR}
     </if>
-    <if test="updatedTime != null and updatedTime != '' " >
-      and updated_time= #{updatedTime,jdbcType = VARCHAR}
+    <if test="createdTime != null and createdTime != '' " >
+      and created_time= #{createdTime,jdbcType = TIMESTAMP}
+    </if>
+    <if test="remark != null and remark != '' " >
+      and remark= #{remark,jdbcType = VARCHAR}
     </if>
     <if test="version != null and version != '' " >
-      and version= #{version,jdbcType = INTEGER}
+      and version= #{version,jdbcType = DECIMAL}
+    </if>
+    <if test="roleId != null and roleId != '' " >
+      and role_id= #{roleId,jdbcType = VARCHAR}
     </if>
     <if test="isDel != null and isDel != '' " >
-      and is_del= #{isDel,jdbcType = INTEGER}
+      and is_del= #{isDel,jdbcType = BIT}
+    </if>
+    <if test="userId != null and userId != '' " >
+      and user_id= #{userId,jdbcType = VARCHAR}
+    </if>
+    <if test="ext != null and ext != '' " >
+      and ext= #{ext,jdbcType = VARCHAR}
     </if>
   </sql>
   <select id="selectList" parameterType="com.common.dao.entity.RoleUser" resultMap="BaseResultMap" >

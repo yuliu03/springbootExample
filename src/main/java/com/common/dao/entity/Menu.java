@@ -1,40 +1,38 @@
 package com.common.dao.entity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Menu {
-    //UUID
     private String uuid;
 
-    //功能模块标识，说明此参数适用的功能模块
     private String menuId;
 
-    //父节点ID
-    private String pid;
-
-    //模块代码
     private String menuName;
 
-    //用户标识导航树的层次级别，0表示标题、1表示分组、2表示节点、3表示子节点、4表示模块菜单
-    private Integer navLevel;
+    private String createdBy;
 
-    //菜单对应的Url
-    private String fileUrl;
+    private Date updatedTime;
 
-    //是否删除
-    private Integer isDel;
+    private String updatedBy;
 
-    //是否为叶子节点
-    private Integer isLeaf;
+    private Date createdTime;
 
-    //排序码
-    private Integer sortCode;
+    private String remark;
 
-    //version
     private BigDecimal version;
 
-    //图标
+    private Boolean isDel;
+
+    private String pid;
+
+    private Boolean isLeaf;
+
+    private String fileUrl;
+
     private String icon;
+
+    private String ext;
 
     public String getUuid() {
         return uuid;
@@ -52,14 +50,6 @@ public class Menu {
         this.menuId = menuId == null ? null : menuId.trim();
     }
 
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid == null ? null : pid.trim();
-    }
-
     public String getMenuName() {
         return menuName;
     }
@@ -68,44 +58,44 @@ public class Menu {
         this.menuName = menuName == null ? null : menuName.trim();
     }
 
-    public Integer getNavLevel() {
-        return navLevel;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setNavLevel(Integer navLevel) {
-        this.navLevel = navLevel;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy == null ? null : createdBy.trim();
     }
 
-    public String getFileUrl() {
-        return fileUrl;
+    public Date getUpdatedTime() {
+        return updatedTime;
     }
 
-    public void setFileUrl(String fileUrl) {
-        this.fileUrl = fileUrl == null ? null : fileUrl.trim();
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
-    public Integer getIsDel() {
-        return isDel;
+    public String getUpdatedBy() {
+        return updatedBy;
     }
 
-    public void setIsDel(Integer isDel) {
-        this.isDel = isDel;
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy == null ? null : updatedBy.trim();
     }
 
-    public Integer getIsLeaf() {
-        return isLeaf;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
-    public void setIsLeaf(Integer isLeaf) {
-        this.isLeaf = isLeaf;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
-    public Integer getSortCode() {
-        return sortCode;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setSortCode(Integer sortCode) {
-        this.sortCode = sortCode;
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public BigDecimal getVersion() {
@@ -116,11 +106,51 @@ public class Menu {
         this.version = version;
     }
 
+    public Boolean getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Boolean isDel) {
+        this.isDel = isDel;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid == null ? null : pid.trim();
+    }
+
+    public Boolean getIsLeaf() {
+        return isLeaf;
+    }
+
+    public void setIsLeaf(Boolean isLeaf) {
+        this.isLeaf = isLeaf;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl == null ? null : fileUrl.trim();
+    }
+
     public String getIcon() {
         return icon;
     }
 
     public void setIcon(String icon) {
         this.icon = icon == null ? null : icon.trim();
+    }
+
+    public String getExt() {
+        return ext;
+    }
+
+    public void setExt(String ext) {
+        this.ext = ext == null ? null : ext.trim();
     }
 }

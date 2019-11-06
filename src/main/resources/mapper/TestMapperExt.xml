@@ -3,23 +3,17 @@
 <mapper namespace="com.common.dao.mapper.TestMapperExt" >
   <!-- 扩展自动生成或自定义的SQl语句写在此文件中 -->
   <sql id="sql_condition" >
-    <if test="uuid != null and uuid != '' " >
-      and uuid= #{uuid,jdbcType = VARCHAR}
-    </if>
     <if test="testId != null and testId != '' " >
       and test_id= #{testId,jdbcType = VARCHAR}
     </if>
-    <if test="version != null and version != '' " >
-      and version= #{version,jdbcType = INTEGER}
+    <if test="testName != null and testName != '' " >
+      and test_name= #{testName,jdbcType = VARCHAR}
     </if>
     <if test="isDel != null and isDel != '' " >
-      and is_del= #{isDel,jdbcType = INTEGER}
+      and is_del= #{isDel,jdbcType = BIT}
     </if>
-    <if test="searchKey != null and searchKey != '' " >
-      and search_key= #{searchKey,jdbcType = VARCHAR}
-    </if>
-    <if test="sortCode != null and sortCode != '' " >
-      and sort_code= #{sortCode,jdbcType = INTEGER}
+    <if test="uuid != null and uuid != '' " >
+      and uuid= #{uuid,jdbcType = VARCHAR}
     </if>
   </sql>
   <select id="selectList" parameterType="com.common.dao.entity.Test" resultMap="BaseResultMap" >

@@ -1,38 +1,34 @@
 package com.common.dao.entity;
 
+import java.util.Date;
+
 public class User {
-    //ID
     private String userId;
 
-    //用户真实姓名
+    private String uuid;
+
     private String userFullName;
+
+    private Boolean isDel;
+
+    private Integer version;
+
+    private String createdBy;
+
+    private Date updatedTime;
+
+    private String updatedBy;
+
+    private Date createdTime;
+
+    private String remark;
+
+    private String menuId;
+
+    private String ext;
 
     //密码
     private String password;
-
-    //是否删除
-    private Integer isDel;
-
-    //数据版本
-    private Integer version;
-
-    //创建者
-    private String createdBy;
-
-    //更新时间
-    private String updatedTime;
-
-    //更新者
-    private String updatedBy;
-
-    //创建时间
-    private String createdTime;
-
-    //备注
-    private String remark;
-
-    //UUID
-    private String uuid;
 
     public String getUserId() {
         return userId;
@@ -40,6 +36,14 @@ public class User {
 
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid == null ? null : uuid.trim();
     }
 
     public String getUserFullName() {
@@ -50,19 +54,11 @@ public class User {
         this.userFullName = userFullName == null ? null : userFullName.trim();
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public Integer getIsDel() {
+    public Boolean getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Integer isDel) {
+    public void setIsDel(Boolean isDel) {
         this.isDel = isDel;
     }
 
@@ -82,12 +78,12 @@ public class User {
         this.createdBy = createdBy == null ? null : createdBy.trim();
     }
 
-    public String getUpdatedTime() {
+    public Date getUpdatedTime() {
         return updatedTime;
     }
 
-    public void setUpdatedTime(String updatedTime) {
-        this.updatedTime = updatedTime == null ? null : updatedTime.trim();
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public String getUpdatedBy() {
@@ -98,12 +94,12 @@ public class User {
         this.updatedBy = updatedBy == null ? null : updatedBy.trim();
     }
 
-    public String getCreatedTime() {
+    public Date getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime == null ? null : createdTime.trim();
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
     public String getRemark() {
@@ -114,11 +110,27 @@ public class User {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getMenuId() {
+        return menuId;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid == null ? null : uuid.trim();
+    public void setMenuId(String menuId) {
+        this.menuId = menuId == null ? null : menuId.trim();
+    }
+
+    public String getExt() {
+        return ext;
+    }
+
+    public void setExt(String ext) {
+        this.ext = ext == null ? null : ext.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 }

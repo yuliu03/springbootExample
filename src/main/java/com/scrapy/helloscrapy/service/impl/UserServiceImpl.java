@@ -47,7 +47,8 @@ class UserServiceImpl implements UserService {
 
     public APIResponse selectList(User record) {
         APIResponse apiResponse = new APIResponse();
-        return apiResponse;
+        List<User> users= userMapperExt.selectList(record);
+        return  apiResponse.success(users);
     }
 
     @Override

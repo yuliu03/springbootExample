@@ -2,7 +2,6 @@ package com.scrapy.helloscrapy.service;
 import com.common.dao.entity.User;
 import com.common.dao.entity.entityJsonBean.SessionUserJsonBean;
 import com.scrapy.helloscrapy.common.APIResponse;
-import java.util.List;
 
 public interface UserService {
     APIResponse deleteByPrimaryKey(User record);

@@ -3,20 +3,22 @@
 <mapper namespace="com.common.dao.mapper.UserMapperExt" >
   <resultMap id="BaseResultMap" type="com.common.dao.entity.User" >
     <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
     <result column="user_full_name" property="userFullName" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
     <result column="version" property="version" jdbcType="INTEGER" />
     <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
-    <result column="updated_time" property="updatedTime" jdbcType="VARCHAR" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
     <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
-    <result column="created_time" property="createdTime" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+    <result column="ext" property="ext" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, user_full_name, password, is_del, version, created_by, updated_time, updated_by, 
-    created_time, remark, uuid
+    user_id, uuid, user_full_name, is_del, version, created_by, updated_time, updated_by, 
+    created_time, remark, menu_id, ext, password
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -29,14 +31,16 @@
     where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.common.dao.entity.User" >
-    insert into user (user_id, user_full_name, password, 
+    insert into user (user_id, uuid, user_full_name,
       is_del, version, created_by, 
       updated_time, updated_by, created_time, 
-      remark, uuid)
-    values (#{userId,jdbcType=VARCHAR}, #{userFullName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{isDel,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, 
-      #{updatedTime,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR})
+      remark, menu_id, ext, 
+      password)
+    values (#{userId,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{userFullName,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=BIT}, #{version,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR}, 
+      #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, #{ext,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.common.dao.entity.User" >
     insert into user
@@ -44,11 +48,11 @@
       <if test="userId != null" >
         user_id,
       </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
       <if test="userFullName != null" >
         user_full_name,
-      </if>
-      <if test="password != null" >
-        password,
       </if>
       <if test="isDel != null" >
         is_del,
@@ -71,22 +75,28 @@
       <if test="remark != null" >
         remark,
       </if>
-      <if test="uuid != null" >
-        uuid,
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="ext != null" >
+        ext,
+      </if>
+      <if test="password != null" >
+        password,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         #{userId,jdbcType=VARCHAR},
       </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
       <if test="userFullName != null" >
         #{userFullName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
       <if test="isDel != null" >
-        #{isDel,jdbcType=INTEGER},
+        #{isDel,jdbcType=BIT},
       </if>
       <if test="version != null" >
         #{version,jdbcType=INTEGER},
@@ -95,33 +105,39 @@
         #{createdBy,jdbcType=VARCHAR},
       </if>
       <if test="updatedTime != null" >
-        #{updatedTime,jdbcType=VARCHAR},
+        #{updatedTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updatedBy != null" >
         #{updatedBy,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null" >
-        #{createdTime,jdbcType=VARCHAR},
+        #{createdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="uuid != null" >
-        #{uuid,jdbcType=VARCHAR},
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.common.dao.entity.User" >
     update user
     <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
       <if test="userFullName != null" >
         user_full_name = #{userFullName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
       <if test="isDel != null" >
-        is_del = #{isDel,jdbcType=INTEGER},
+        is_del = #{isDel,jdbcType=BIT},
       </if>
       <if test="version != null" >
         version = #{version,jdbcType=INTEGER},
@@ -130,35 +146,43 @@
         created_by = #{createdBy,jdbcType=VARCHAR},
       </if>
       <if test="updatedTime != null" >
-        updated_time = #{updatedTime,jdbcType=VARCHAR},
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updatedBy != null" >
         updated_by = #{updatedBy,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null" >
-        created_time = #{createdTime,jdbcType=VARCHAR},
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="uuid != null" >
-        uuid = #{uuid,jdbcType=VARCHAR},
+      <if test="menuId != null" >
+        menu_id = #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        ext = #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.common.dao.entity.User" >
     update user
-    set user_full_name = #{userFullName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=INTEGER},
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      user_full_name = #{userFullName,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT},
       version = #{version,jdbcType=INTEGER},
       created_by = #{createdBy,jdbcType=VARCHAR},
-      updated_time = #{updatedTime,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       updated_by = #{updatedBy,jdbcType=VARCHAR},
-      created_time = #{createdTime,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR},
-      uuid = #{uuid,jdbcType=VARCHAR}
+      menu_id = #{menuId,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>

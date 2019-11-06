@@ -3,19 +3,22 @@
 <mapper namespace="com.common.dao.mapper.RoleUserMapperExt" >
   <resultMap id="BaseResultMap" type="com.common.dao.entity.RoleUser" >
     <id column="uuid" property="uuid" jdbcType="VARCHAR" />
-    <result column="role_user_id" property="roleUserId" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="user_role_id" property="userRoleId" jdbcType="VARCHAR" />
+    <result column="user_role_name" property="userRoleName" jdbcType="VARCHAR" />
     <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
-    <result column="created_time" property="createdTime" jdbcType="VARCHAR" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
     <result column="updated_by" property="updatedBy" jdbcType="VARCHAR" />
-    <result column="updated_time" property="updatedTime" jdbcType="VARCHAR" />
-    <result column="version" property="version" jdbcType="INTEGER" />
-    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="DECIMAL" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="ext" property="ext" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    uuid, role_user_id, user_id, role_id, created_by, created_time, updated_by, updated_time, 
-    version, is_del
+    uuid, user_role_id, user_role_name, created_by, updated_time, updated_by, created_time, 
+    remark, version, role_id, is_del, user_id, ext
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -28,14 +31,16 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.common.dao.entity.RoleUser" >
-    insert into role_user (uuid, role_user_id, user_id, 
-      role_id, created_by, created_time, 
-      updated_by, updated_time, version, 
-      is_del)
-    values (#{uuid,jdbcType=VARCHAR}, #{roleUserId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{roleId,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=VARCHAR}, 
-      #{updatedBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
-      #{isDel,jdbcType=INTEGER})
+    insert into role_user (uuid, user_role_id, user_role_name, 
+      created_by, updated_time, updated_by, 
+      created_time, remark, version, 
+      role_id, is_del, user_id, 
+      ext)
+    values (#{uuid,jdbcType=VARCHAR}, #{userRoleId,jdbcType=VARCHAR}, #{userRoleName,jdbcType=VARCHAR}, 
+      #{createdBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{version,jdbcType=DECIMAL}, 
+      #{roleId,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, #{userId,jdbcType=VARCHAR}, 
+      #{ext,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.common.dao.entity.RoleUser" >
     insert into role_user
@@ -43,111 +48,141 @@
       <if test="uuid != null" >
         uuid,
       </if>
-      <if test="roleUserId != null" >
-        role_user_id,
+      <if test="userRoleId != null" >
+        user_role_id,
       </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="roleId != null" >
-        role_id,
+      <if test="userRoleName != null" >
+        user_role_name,
       </if>
       <if test="createdBy != null" >
         created_by,
       </if>
-      <if test="createdTime != null" >
-        created_time,
+      <if test="updatedTime != null" >
+        updated_time,
       </if>
       <if test="updatedBy != null" >
         updated_by,
       </if>
-      <if test="updatedTime != null" >
-        updated_time,
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="remark != null" >
+        remark,
       </if>
       <if test="version != null" >
         version,
       </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
       <if test="isDel != null" >
         is_del,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="ext != null" >
+        ext,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
         #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="roleUserId != null" >
-        #{roleUserId,jdbcType=VARCHAR},
+      <if test="userRoleId != null" >
+        #{userRoleId,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=VARCHAR},
+      <if test="userRoleName != null" >
+        #{userRoleName,jdbcType=VARCHAR},
       </if>
       <if test="createdBy != null" >
         #{createdBy,jdbcType=VARCHAR},
       </if>
-      <if test="createdTime != null" >
-        #{createdTime,jdbcType=VARCHAR},
+      <if test="updatedTime != null" >
+        #{updatedTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updatedBy != null" >
         #{updatedBy,jdbcType=VARCHAR},
       </if>
-      <if test="updatedTime != null" >
-        #{updatedTime,jdbcType=VARCHAR},
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="version != null" >
-        #{version,jdbcType=INTEGER},
+        #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null" >
-        #{isDel,jdbcType=INTEGER},
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        #{ext,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.common.dao.entity.RoleUser" >
     update role_user
     <set >
-      <if test="roleUserId != null" >
-        role_user_id = #{roleUserId,jdbcType=VARCHAR},
+      <if test="userRoleId != null" >
+        user_role_id = #{userRoleId,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=VARCHAR},
+      <if test="userRoleName != null" >
+        user_role_name = #{userRoleName,jdbcType=VARCHAR},
       </if>
       <if test="createdBy != null" >
         created_by = #{createdBy,jdbcType=VARCHAR},
       </if>
-      <if test="createdTime != null" >
-        created_time = #{createdTime,jdbcType=VARCHAR},
+      <if test="updatedTime != null" >
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updatedBy != null" >
         updated_by = #{updatedBy,jdbcType=VARCHAR},
       </if>
-      <if test="updatedTime != null" >
-        updated_time = #{updatedTime,jdbcType=VARCHAR},
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="version != null" >
-        version = #{version,jdbcType=INTEGER},
+        version = #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null" >
-        is_del = #{isDel,jdbcType=INTEGER},
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null" >
+        ext = #{ext,jdbcType=VARCHAR},
       </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.common.dao.entity.RoleUser" >
     update role_user
-    set role_user_id = #{roleUserId,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      role_id = #{roleId,jdbcType=VARCHAR},
+    set user_role_id = #{userRoleId,jdbcType=VARCHAR},
+      user_role_name = #{userRoleName,jdbcType=VARCHAR},
       created_by = #{createdBy,jdbcType=VARCHAR},
-      created_time = #{createdTime,jdbcType=VARCHAR},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
       updated_by = #{updatedBy,jdbcType=VARCHAR},
-      updated_time = #{updatedTime,jdbcType=VARCHAR},
-      version = #{version,jdbcType=INTEGER},
-      is_del = #{isDel,jdbcType=INTEGER}
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      version = #{version,jdbcType=DECIMAL},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=BIT},
+      user_id = #{userId,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

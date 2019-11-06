@@ -12,32 +12,29 @@
     <if test="roleName != null and roleName != '' " >
       and role_name= #{roleName,jdbcType = VARCHAR}
     </if>
-    <if test="roleDesc != null and roleDesc != '' " >
-      and role_desc= #{roleDesc,jdbcType = VARCHAR}
-    </if>
     <if test="createdBy != null and createdBy != '' " >
       and created_by= #{createdBy,jdbcType = VARCHAR}
     </if>
-    <if test="createdTime != null and createdTime != '' " >
-      and created_time= #{createdTime,jdbcType = VARCHAR}
+    <if test="updatedTime != null and updatedTime != '' " >
+      and updated_time= #{updatedTime,jdbcType = TIMESTAMP}
     </if>
     <if test="updatedBy != null and updatedBy != '' " >
       and updated_by= #{updatedBy,jdbcType = VARCHAR}
     </if>
-    <if test="updatedTime != null and updatedTime != '' " >
-      and updated_time= #{updatedTime,jdbcType = VARCHAR}
+    <if test="createdTime != null and createdTime != '' " >
+      and created_time= #{createdTime,jdbcType = TIMESTAMP}
+    </if>
+    <if test="remark != null and remark != '' " >
+      and remark= #{remark,jdbcType = VARCHAR}
     </if>
     <if test="version != null and version != '' " >
-      and version= #{version,jdbcType = INTEGER}
+      and version= #{version,jdbcType = DECIMAL}
     </if>
     <if test="isDel != null and isDel != '' " >
-      and is_del= #{isDel,jdbcType = INTEGER}
+      and is_del= #{isDel,jdbcType = BIT}
     </if>
-    <if test="searchKey != null and searchKey != '' " >
-      and search_key= #{searchKey,jdbcType = VARCHAR}
-    </if>
-    <if test="sortCode != null and sortCode != '' " >
-      and sort_code= #{sortCode,jdbcType = INTEGER}
+    <if test="ext != null and ext != '' " >
+      and ext= #{ext,jdbcType = VARCHAR}
     </if>
   </sql>
   <select id="selectList" parameterType="com.common.dao.entity.Role" resultMap="BaseResultMap" >

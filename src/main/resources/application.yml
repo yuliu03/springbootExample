@@ -1,13 +1,16 @@
 server:
-  port: 8080
+  port: 8888
 
 spring:
   datasource:
-    name: test
+    name: mysql80
     url: jdbc:mysql://127.0.0.1:3306/base_mall?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+    #下面这两个配置，可以在每次连接的时候判断一些连接是否有效
+    druid.test-on-borrow: true
+    druid.test-while-idle: true
 
   redis:
     # Redis数据库索引（默认为0）

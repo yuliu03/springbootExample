@@ -1,35 +1,32 @@
 package com.common.dao.entity;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class RoleMenu {
-    //UUID
     private String uuid;
 
-    //角色菜单ID
-    private String roleMenuId;
+    private String menuRoleId;
 
-    //菜单id
-    private String menuId;
+    private String menuRoleName;
 
-    //角色ID
-    private String roleId;
-
-    //记录数据创建用户，用于审计，无业务含义，如果是单据，可以作为制单人使用
     private String createdBy;
 
-    //系统保留字段，记录数据创建时间，用于系统审计，无实际业务含义
-    private String createdTime;
+    private Date updatedTime;
 
-    //记录数据最后更新用户，用于审计，无业务含义
     private String updatedBy;
 
-    //记录数据最后时间，用于审计，无业务含义
-    private String updatedTime;
+    private Date createdTime;
 
-    //表示当前数据版本，用于控制业务并发，无其它业务含义
-    private Integer version;
+    private String remark;
 
-    //是否删除
-    private Integer isDel;
+    private BigDecimal version;
+
+    private Boolean isDel;
+
+    private String menuId;
+
+    private String roleId;
 
     public String getUuid() {
         return uuid;
@@ -39,12 +36,76 @@ public class RoleMenu {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public String getRoleMenuId() {
-        return roleMenuId;
+    public String getMenuRoleId() {
+        return menuRoleId;
     }
 
-    public void setRoleMenuId(String roleMenuId) {
-        this.roleMenuId = roleMenuId == null ? null : roleMenuId.trim();
+    public void setMenuRoleId(String menuRoleId) {
+        this.menuRoleId = menuRoleId == null ? null : menuRoleId.trim();
+    }
+
+    public String getMenuRoleName() {
+        return menuRoleName;
+    }
+
+    public void setMenuRoleName(String menuRoleName) {
+        this.menuRoleName = menuRoleName == null ? null : menuRoleName.trim();
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy == null ? null : createdBy.trim();
+    }
+
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy == null ? null : updatedBy.trim();
+    }
+
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public BigDecimal getVersion() {
+        return version;
+    }
+
+    public void setVersion(BigDecimal version) {
+        this.version = version;
+    }
+
+    public Boolean getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Boolean isDel) {
+        this.isDel = isDel;
     }
 
     public String getMenuId() {
@@ -61,53 +122,5 @@ public class RoleMenu {
 
     public void setRoleId(String roleId) {
         this.roleId = roleId == null ? null : roleId.trim();
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy == null ? null : createdBy.trim();
-    }
-
-    public String getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime == null ? null : createdTime.trim();
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy == null ? null : updatedBy.trim();
-    }
-
-    public String getUpdatedTime() {
-        return updatedTime;
-    }
-
-    public void setUpdatedTime(String updatedTime) {
-        this.updatedTime = updatedTime == null ? null : updatedTime.trim();
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Integer getIsDel() {
-        return isDel;
-    }
-
-    public void setIsDel(Integer isDel) {
-        this.isDel = isDel;
     }
 }

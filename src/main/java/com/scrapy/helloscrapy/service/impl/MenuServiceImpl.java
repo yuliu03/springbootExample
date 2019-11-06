@@ -46,7 +46,7 @@ class MenuServiceImpl implements MenuService {
         MenuJsonBean subMenuListCondition = new MenuJsonBean();
         //////
         //如果为空，返回所有菜单
-        if (record == null){
+        if (record.getUuid() == null){
             //设置条件
             subMenuListCondition.setPid("0");
             //递归获取子集菜单
@@ -84,7 +84,7 @@ class MenuServiceImpl implements MenuService {
     }
 
     private MenuJsonBean auxSubMenuList(MenuJsonBean record){
-            if (record.getIsLeaf()==1){
+            if (record.getIsLeaf()==true){
                 return record;
             }else {
                 MenuJsonBean subMenuListCondition = new MenuJsonBean();
