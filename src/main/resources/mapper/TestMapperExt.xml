@@ -9,8 +9,8 @@
     <if test="testName != null and testName != '' " >
       and test_name= #{testName,jdbcType = VARCHAR}
     </if>
-    <if test="isDel != null and isDel != '' " >
-      and is_del= #{isDel,jdbcType = BIT}
+    <if test="isDel != null " >
+      and is_del= #{isDel,jdbcType = TINYINT}
     </if>
     <if test="uuid != null and uuid != '' " >
       and uuid= #{uuid,jdbcType = VARCHAR}

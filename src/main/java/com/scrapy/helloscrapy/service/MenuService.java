@@ -14,4 +14,6 @@ public interface MenuService {
     APIResponse updateByPrimaryKey(Menu record);
 
     APIResponse selectList(Menu record);
+
+    APIResponse selectListRecursive(Menu record);
 }

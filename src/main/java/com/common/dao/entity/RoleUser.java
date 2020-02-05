@@ -1,9 +1,10 @@
 package com.common.dao.entity;
 
+import com.common.dao.baseDomain.Domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class RoleUser {
+public class RoleUser extends Domain {
     private String uuid;
 
     private String userRoleId;
@@ -22,13 +23,13 @@ public class RoleUser {
 
     private BigDecimal version;
 
-    private String roleId;
-
-    private Boolean isDel;
-
-    private String userId;
+    private Byte isDel;
 
     private String ext;
+
+    private String roleId;
+
+    private String userId;
 
     public String getUuid() {
         return uuid;
@@ -102,28 +103,12 @@ public class RoleUser {
         this.version = version;
     }
 
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
-    }
-
-    public Boolean getIsDel() {
+    public Byte getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Boolean isDel) {
+    public void setIsDel(Byte isDel) {
         this.isDel = isDel;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getExt() {
@@ -132,5 +117,21 @@ public class RoleUser {
 
     public void setExt(String ext) {
         this.ext = ext == null ? null : ext.trim();
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 }

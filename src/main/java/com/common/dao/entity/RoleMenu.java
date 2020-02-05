@@ -1,10 +1,13 @@
 package com.common.dao.entity;
 
+import com.common.dao.baseDomain.Domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class RoleMenu {
+public class RoleMenu extends Domain {
     private String uuid;
+
+    private String roleId;
 
     private String menuRoleId;
 
@@ -22,11 +25,9 @@ public class RoleMenu {
 
     private BigDecimal version;
 
-    private Boolean isDel;
+    private Byte isDel;
 
     private String menuId;
-
-    private String roleId;
 
     public String getUuid() {
         return uuid;
@@ -34,6 +35,14 @@ public class RoleMenu {
 
     public void setUuid(String uuid) {
         this.uuid = uuid == null ? null : uuid.trim();
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 
     public String getMenuRoleId() {
@@ -100,11 +109,11 @@ public class RoleMenu {
         this.version = version;
     }
 
-    public Boolean getIsDel() {
+    public Byte getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Boolean isDel) {
+    public void setIsDel(Byte isDel) {
         this.isDel = isDel;
     }
 
@@ -114,13 +123,5 @@ public class RoleMenu {
 
     public void setMenuId(String menuId) {
         this.menuId = menuId == null ? null : menuId.trim();
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
     }
 }

@@ -3,6 +3,8 @@ import com.common.dao.entity.User;
 import com.common.dao.entity.entityJsonBean.SessionUserJsonBean;
 import com.scrapy.helloscrapy.common.APIResponse;
 
+import java.util.Map;
+
 public interface UserService {
     APIResponse deleteByPrimaryKey(User record);
 
@@ -19,4 +21,6 @@ public interface UserService {
     APIResponse login(User user);
 
     void logout(SessionUserJsonBean sessionUserJsonBean);
+
+    APIResponse selectListByFilter(Map<String, String> record);
 }

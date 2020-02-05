@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.common.dao.entity.Test" >
     <id column="test_id" property="testId" jdbcType="VARCHAR" />
     <result column="test_name" property="testName" jdbcType="VARCHAR" />
-    <result column="is_del" property="isDel" jdbcType="BIT" />
+    <result column="is_del" property="isDel" jdbcType="TINYINT" />
     <result column="uuid" property="uuid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -23,7 +23,7 @@
   <insert id="insert" parameterType="com.common.dao.entity.Test" >
     insert into test (test_id, test_name, is_del, 
       uuid)
-    values (#{testId,jdbcType=VARCHAR}, #{testName,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, 
+    values (#{testId,jdbcType=VARCHAR}, #{testName,jdbcType=VARCHAR}, #{isDel,jdbcType=TINYINT}, 
       #{uuid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.common.dao.entity.Test" >
@@ -50,7 +50,7 @@
         #{testName,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null" >
-        #{isDel,jdbcType=BIT},
+        #{isDel,jdbcType=TINYINT},
       </if>
       <if test="uuid != null" >
         #{uuid,jdbcType=VARCHAR},
@@ -64,7 +64,7 @@
         test_name = #{testName,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null" >
-        is_del = #{isDel,jdbcType=BIT},
+        is_del = #{isDel,jdbcType=TINYINT},
       </if>
       <if test="uuid != null" >
         uuid = #{uuid,jdbcType=VARCHAR},
@@ -75,7 +75,7 @@
   <update id="updateByPrimaryKey" parameterType="com.common.dao.entity.Test" >
     update test
     set test_name = #{testName,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=TINYINT},
       uuid = #{uuid,jdbcType=VARCHAR}
     where test_id = #{testId,jdbcType=VARCHAR}
   </update>

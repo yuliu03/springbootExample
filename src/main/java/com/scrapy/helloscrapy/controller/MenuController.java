@@ -44,4 +44,9 @@ class MenuController {
     public APIResponse selectList(HttpServletRequest request, HttpSession session, @RequestBody(required = false) Menu record) {
         APIResponse apiResponse = menuService.selectList(record);return apiResponse;
     }
+
+    @RequestMapping(value = "selectListRecursive",method = RequestMethod.POST)
+    public APIResponse selectListRecursive(HttpServletRequest request, HttpSession session, @RequestBody(required = false) Menu record) {
+        APIResponse apiResponse = menuService.selectListRecursive(record);return apiResponse;
+    }
 }

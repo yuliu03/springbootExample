@@ -2,6 +2,8 @@ package com.scrapy.helloscrapy.service.impl;
 import com.common.dao.entity.User;
 import com.common.dao.entity.entityJsonBean.SessionUserJsonBean;
 import com.common.dao.mapper.UserMapperExt;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.scrapy.helloscrapy.common.APIResponse;
 import com.scrapy.helloscrapy.common.GlobalConfigParam;
 import com.scrapy.helloscrapy.common.RedisUtil;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -37,6 +40,11 @@ class UserServiceImpl implements UserService {
 
     public APIResponse updateByPrimaryKeySelective(User record) {
         APIResponse apiResponse = new APIResponse();
+        if(userMapperExt.updateByPrimaryKeySelective(record) > 0){
+            apiResponse.setCode(APIResponse.SUCCESS);
+        }else{
+            apiResponse.setCode(APIResponse.FAIL);
+        }
         return apiResponse;
     }
 
@@ -47,8 +55,23 @@ class UserServiceImpl implements UserService {
 
     public APIResponse selectList(User record) {
         APIResponse apiResponse = new APIResponse();
-        List<User> users= userMapperExt.selectList(record);
-        return  apiResponse.success(users);
+        //排序实现: 数据库字段 + " desc" 或 数据库字段 + " asc"
+        //PageHelper.startPage(1, 10, "create_time desc");
+        //PageHelper.startPage(record.getPageNum(), record.getPageSize(),"create_time desc");
+        int startPage = record.getPageNum();
+        int pageSize = record.getPageSize();
+
+        //过滤已被删除的数据
+        record.setIsDel((byte) 0);
+
+        PageHelper.startPage(startPage, pageSize);
+        List<User> userList= userMapperExt.selectList(record);
+
+        PageInfo<User> userPageInfo = new PageInfo<User>(userList);
+        apiResponse.setData(userPageInfo);
+        apiResponse.setTotal((int) userPageInfo.getTotal());
+        apiResponse.setCode(APIResponse.SUCCESS);
+        return  apiResponse;
     }
 
     @Override
@@ -79,5 +102,67 @@ class UserServiceImpl implements UserService {
     @Override
     public void logout(SessionUserJsonBean sessionUserJsonBean) {
         redisUtil.del(sessionUserJsonBean.getToken());
+    }
+
+    @Override
+    public APIResponse selectListByFilter(Map<String, String> record) {
+        User selectUserListCondition = new User();
+
+        String userid = (String)record.get("userId");
+        if(userid != null && !userid.equals("")){
+            selectUserListCondition.setUserId(userid);
+        }
+
+        String password = (String)record.get("password");
+        if(password != null && !password.equals("")){
+            selectUserListCondition.setPassword(password);
+        }
+
+        String userFullName = (String)record.get("userFullName");
+        if(userFullName != null && !userFullName.equals("")){
+            selectUserListCondition.setUserName(userFullName);
+        }
+
+//        String startTime = (String)record.get("startTime");
+//        if(startTime != null && !startTime.equals("")){
+//            selectUserListCondition.setUserFullName(userFullName);
+//        }
+//
+//        String userFullName = (String)record.get("userFullName");
+//        if(userFullName != null && !userFullName.equals("")){
+//            selectUserListCondition.setUserFullName(userFullName);
+//        }
+
+
+        String pageNum = (String)record.get("pageNum");
+        if(pageNum != null && !pageNum.equals("") && !pageNum.equals("0")){
+            selectUserListCondition.setPageNum(Integer.parseInt(pageNum));
+        }else{
+            selectUserListCondition.setPageNum(1);
+        }
+
+        String pageSize = (String)record.get("pageSize");
+        if(pageSize != null && !pageSize.equals("") && !pageSize.equals("0")){
+            selectUserListCondition.setPageSize(Integer.parseInt(pageSize));
+        }else{
+            selectUserListCondition.setPageSize(10);
+        }
+
+        //过滤已被删除的数据
+        selectUserListCondition.setIsDel((byte) 0);
+
+        PageHelper.startPage(selectUserListCondition.getPageNum(),
+                selectUserListCondition.getPageSize());
+
+        List<User> userList= userMapperExt.selectList(selectUserListCondition);
+
+        PageInfo<User> userPageInfo = new PageInfo<User>(userList);
+
+        APIResponse<Object> apiResponse = new APIResponse<>();
+        apiResponse.setData(userPageInfo);
+        apiResponse.setTotal((int) userPageInfo.getTotal());
+        apiResponse.setCode(APIResponse.SUCCESS);
+
+        return apiResponse;
     }
 }

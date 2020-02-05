@@ -1,9 +1,10 @@
 package com.common.dao.entity;
 
+import com.common.dao.baseDomain.Domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Menu {
+public class Menu extends Domain {
     private String uuid;
 
     private String menuId;
@@ -22,7 +23,7 @@ public class Menu {
 
     private BigDecimal version;
 
-    private Boolean isDel;
+    private Byte isDel;
 
     private String pid;
 
@@ -106,11 +107,11 @@ public class Menu {
         this.version = version;
     }
 
-    public Boolean getIsDel() {
+    public Byte getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Boolean isDel) {
+    public void setIsDel(Byte isDel) {
         this.isDel = isDel;
     }
 

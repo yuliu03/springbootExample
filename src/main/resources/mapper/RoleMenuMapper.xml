@@ -3,6 +3,7 @@
 <mapper namespace="com.common.dao.mapper.RoleMenuMapperExt" >
   <resultMap id="BaseResultMap" type="com.common.dao.entity.RoleMenu" >
     <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
     <result column="menu_role_id" property="menuRoleId" jdbcType="VARCHAR" />
     <result column="menu_role_name" property="menuRoleName" jdbcType="VARCHAR" />
     <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
@@ -11,13 +12,12 @@
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="version" property="version" jdbcType="DECIMAL" />
-    <result column="is_del" property="isDel" jdbcType="BIT" />
+    <result column="is_del" property="isDel" jdbcType="TINYINT" />
     <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    uuid, menu_role_id, menu_role_name, created_by, updated_time, updated_by, created_time, 
-    remark, version, is_del, menu_id, role_id
+    uuid, role_id, menu_role_id, menu_role_name, created_by, updated_time, updated_by, 
+    created_time, remark, version, is_del, menu_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -30,20 +30,25 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.common.dao.entity.RoleMenu" >
-    insert into role_menu (uuid, menu_role_id, menu_role_name, 
-      created_by, updated_time, updated_by, 
-      created_time, remark, version, 
-      is_del, menu_id, role_id)
-    values (#{uuid,jdbcType=VARCHAR}, #{menuRoleId,jdbcType=VARCHAR}, #{menuRoleName,jdbcType=VARCHAR}, 
-      #{createdBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, 
-      #{createdTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{version,jdbcType=DECIMAL}, 
-      #{isDel,jdbcType=BIT}, #{menuId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR})
+    insert into role_menu (uuid, role_id, menu_role_id, 
+      menu_role_name, created_by, updated_time, 
+      updated_by, created_time, remark, 
+      version, is_del, menu_id
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{menuRoleId,jdbcType=VARCHAR}, 
+      #{menuRoleName,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{updatedBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{version,jdbcType=DECIMAL}, #{isDel,jdbcType=TINYINT}, #{menuId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.common.dao.entity.RoleMenu" >
     insert into role_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
         uuid,
+      </if>
+      <if test="roleId != null" >
+        role_id,
       </if>
       <if test="menuRoleId != null" >
         menu_role_id,
@@ -75,13 +80,13 @@
       <if test="menuId != null" >
         menu_id,
       </if>
-      <if test="roleId != null" >
-        role_id,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uuid != null" >
         #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="menuRoleId != null" >
         #{menuRoleId,jdbcType=VARCHAR},
@@ -108,19 +113,19 @@
         #{version,jdbcType=DECIMAL},
       </if>
       <if test="isDel != null" >
-        #{isDel,jdbcType=BIT},
+        #{isDel,jdbcType=TINYINT},
       </if>
       <if test="menuId != null" >
         #{menuId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.common.dao.entity.RoleMenu" >
     update role_menu
     <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
       <if test="menuRoleId != null" >
         menu_role_id = #{menuRoleId,jdbcType=VARCHAR},
       </if>
@@ -146,20 +151,18 @@
         version = #{version,jdbcType=DECIMAL},
       </if>
       <if test="isDel != null" >
-        is_del = #{isDel,jdbcType=BIT},
+        is_del = #{isDel,jdbcType=TINYINT},
       </if>
       <if test="menuId != null" >
         menu_id = #{menuId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.common.dao.entity.RoleMenu" >
     update role_menu
-    set menu_role_id = #{menuRoleId,jdbcType=VARCHAR},
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      menu_role_id = #{menuRoleId,jdbcType=VARCHAR},
       menu_role_name = #{menuRoleName,jdbcType=VARCHAR},
       created_by = #{createdBy,jdbcType=VARCHAR},
       updated_time = #{updatedTime,jdbcType=TIMESTAMP},
@@ -167,9 +170,8 @@
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR},
       version = #{version,jdbcType=DECIMAL},
-      is_del = #{isDel,jdbcType=BIT},
-      menu_id = #{menuId,jdbcType=VARCHAR},
-      role_id = #{roleId,jdbcType=VARCHAR}
+      is_del = #{isDel,jdbcType=TINYINT},
+      menu_id = #{menuId,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>

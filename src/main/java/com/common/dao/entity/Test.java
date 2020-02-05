@@ -1,11 +1,13 @@
 package com.common.dao.entity;
 
-public class Test {
+import com.common.dao.baseDomain.Domain;
+
+public class Test extends Domain {
     private String testId;
 
     private String testName;
 
-    private Boolean isDel;
+    private Byte isDel;
 
     private String uuid;
 
@@ -25,11 +27,11 @@ public class Test {
         this.testName = testName == null ? null : testName.trim();
     }
 
-    public Boolean getIsDel() {
+    public Byte getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Boolean isDel) {
+    public void setIsDel(Byte isDel) {
         this.isDel = isDel;
     }
 

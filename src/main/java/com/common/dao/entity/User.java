@@ -1,17 +1,17 @@
 package com.common.dao.entity;
 
+import com.common.dao.baseDomain.Domain;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class User {
-    private String userId;
-
+public class User extends Domain {
     private String uuid;
 
-    private String userFullName;
+    private String userId;
 
-    private Boolean isDel;
+    private String userName;
 
-    private Integer version;
+    private String password;
 
     private String createdBy;
 
@@ -23,20 +23,11 @@ public class User {
 
     private String remark;
 
-    private String menuId;
+    private BigDecimal version;
+
+    private Byte isDel;
 
     private String ext;
-
-    //密码
-    private String password;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
 
     public String getUuid() {
         return uuid;
@@ -46,28 +37,28 @@ public class User {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public String getUserFullName() {
-        return userFullName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserFullName(String userFullName) {
-        this.userFullName = userFullName == null ? null : userFullName.trim();
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public Boolean getIsDel() {
-        return isDel;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setIsDel(Boolean isDel) {
-        this.isDel = isDel;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
-    public Integer getVersion() {
-        return version;
+    public String getPassword() {
+        return password;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
     public String getCreatedBy() {
@@ -110,12 +101,20 @@ public class User {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getMenuId() {
-        return menuId;
+    public BigDecimal getVersion() {
+        return version;
     }
 
-    public void setMenuId(String menuId) {
-        this.menuId = menuId == null ? null : menuId.trim();
+    public void setVersion(BigDecimal version) {
+        this.version = version;
+    }
+
+    public Byte getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Byte isDel) {
+        this.isDel = isDel;
     }
 
     public String getExt() {
@@ -124,13 +123,5 @@ public class User {
 
     public void setExt(String ext) {
         this.ext = ext == null ? null : ext.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
     }
 }

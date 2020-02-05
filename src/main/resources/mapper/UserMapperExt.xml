@@ -3,20 +3,17 @@
 <mapper namespace="com.common.dao.mapper.UserMapperExt" >
   <!-- 扩展自动生成或自定义的SQl语句写在此文件中 -->
   <sql id="sql_condition" >
-    <if test="userId != null and userId != '' " >
-      and user_id= #{userId,jdbcType = VARCHAR}
-    </if>
     <if test="uuid != null and uuid != '' " >
       and uuid= #{uuid,jdbcType = VARCHAR}
     </if>
-    <if test="userFullName != null and userFullName != '' " >
-      and user_full_name= #{userFullName,jdbcType = VARCHAR}
+    <if test="userId != null and userId != '' " >
+      and user_id= #{userId,jdbcType = VARCHAR}
     </if>
-    <if test="isDel != null and isDel != '' " >
-      and is_del= #{isDel,jdbcType = BIT}
+    <if test="userName != null and userName != '' " >
+      and user_name= #{userName,jdbcType = VARCHAR}
     </if>
-    <if test="version != null and version != '' " >
-      and version= #{version,jdbcType = INTEGER}
+    <if test="password != null and password != '' " >
+      and password= #{password,jdbcType = VARCHAR}
     </if>
     <if test="createdBy != null and createdBy != '' " >
       and created_by= #{createdBy,jdbcType = VARCHAR}
@@ -33,14 +30,14 @@
     <if test="remark != null and remark != '' " >
       and remark= #{remark,jdbcType = VARCHAR}
     </if>
-    <if test="menuId != null and menuId != '' " >
-      and menu_id= #{menuId,jdbcType = VARCHAR}
+    <if test="version != null and version != '' " >
+      and version= #{version,jdbcType = DECIMAL}
+    </if>
+    <if test="isDel != null " >
+      and is_del= #{isDel,jdbcType = TINYINT}
     </if>
     <if test="ext != null and ext != '' " >
       and ext= #{ext,jdbcType = VARCHAR}
-    </if>
-    <if test="password != null and password != '' " >
-      and password= #{password,jdbcType = VARCHAR}
     </if>
   </sql>
   <select id="selectList" parameterType="com.common.dao.entity.User" resultMap="BaseResultMap" >

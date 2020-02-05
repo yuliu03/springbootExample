@@ -5,10 +5,10 @@ import com.scrapy.helloscrapy.common.APIResponse;
 import com.scrapy.helloscrapy.service.UserService;
 import javax.servlet.http.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+
+import java.util.Map;
 
 @RestController
 @RequestMapping(value ="/User/")
@@ -38,7 +38,8 @@ class UserController {
 
     @RequestMapping(value = "updateByPrimaryKey",method = RequestMethod.POST)
     public APIResponse updateByPrimaryKey(HttpServletRequest request, HttpSession session, @RequestBody User record) {
-        APIResponse apiResponse = userService.updateByPrimaryKey(record);return apiResponse;
+        APIResponse apiResponse = userService.updateByPrimaryKey(record);
+        return apiResponse;
     }
 
     @RequestMapping(value = "selectList",method = RequestMethod.POST)
@@ -49,7 +50,7 @@ class UserController {
     //////////////////
 
     /**
-     * 这里为了能简单在浏览器响应，暂时使用GET请求，
+     * post请求，
      * @return
      */
     @RequestMapping(value = "login",method = RequestMethod.POST)
@@ -78,6 +79,39 @@ class UserController {
     @RequestMapping(value = "logout",method = RequestMethod.POST)
     public void logout(HttpSession session, HttpServletRequest request,@RequestBody(required = true) SessionUserJsonBean user){
         userService.logout(user);
+    }
+
+    /*
+     * 时间区间过滤查询
+     */
+    @RequestMapping(value = "selectListByFilter",method = RequestMethod.POST)
+    public APIResponse selectListByFilter(HttpServletRequest request, HttpSession session, @RequestBody Map<String,String> record) {
+        if (record == null || record.isEmpty()){
+            return new APIResponse(APIResponse.NOT_INITIALIZED);
+        }else{
+            APIResponse apiResponse = userService.selectListByFilter(record);
+            return apiResponse;
+        }
+    }
+
+    /*
+     * 时间区间过滤查询
+     */
+    @RequestMapping(value = "singleLogicDel",method = RequestMethod.POST)
+    public APIResponse singleLogicDel(HttpServletRequest request, HttpSession session, @RequestBody User record) {
+        if (record == null || record.getUuid() == ""){
+            return new APIResponse(APIResponse.NOT_INITIALIZED);
+        }else{
+            //获取主要信息，防止被恶意篡改
+            User tmpRecord = new User();
+            tmpRecord.setUuid(record.getUuid());
+            //根据uuid获取所有信息，只更改is_del内容，因为直接调用updateSelect会把虽有的内容都更改了
+//            tmpRecord=(User)userService.selectByPrimaryKey(tmpRecord).getData();
+
+            tmpRecord.setIsDel((byte) 1);
+            APIResponse apiResponse = userService.updateByPrimaryKeySelective(tmpRecord);
+            return apiResponse;
+        }
     }
 
 }

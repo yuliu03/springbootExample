@@ -30,13 +30,13 @@
     <if test="version != null and version != '' " >
       and version= #{version,jdbcType = DECIMAL}
     </if>
-    <if test="isDel != null and isDel != '' " >
-      and is_del= #{isDel,jdbcType = BIT}
+    <if test="isDel != null " >
+      and is_del= #{isDel,jdbcType = TINYINT}
     </if>
     <if test="pid != null and pid != '' " >
       and pid= #{pid,jdbcType = VARCHAR}
     </if>
-    <if test="isLeaf != null and isLeaf != '' " >
+    <if test="isLeaf != null " >
       and is_leaf= #{isLeaf,jdbcType = BIT}
     </if>
     <if test="fileUrl != null and fileUrl != '' " >
@@ -49,11 +49,7 @@
       and ext= #{ext,jdbcType = VARCHAR}
     </if>
   </sql>
-
-  <resultMap id="ResultMapExt" type="com.common.dao.entity.entityJsonBean.MenuJsonBean" extends="BaseResultMap">
-  </resultMap>
-
-  <select id="selectList" parameterType="com.common.dao.entity.Menu" resultMap="ResultMapExt" >
+  <select id="selectList" parameterType="com.common.dao.entity.Menu" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from menu
@@ -62,6 +58,16 @@
     </trim>
   </select>
 
+  <!--以下为后期加入，非自动生成-->
+  <resultMap id="ResultMapExt" type="com.common.dao.entity.entityJsonBean.MenuJsonBean" extends="BaseResultMap">
+  </resultMap>
 
-
+  <select id="selectListRecursive" parameterType="com.common.dao.entity.Menu" resultMap="ResultMapExt" >
+    select
+    <include refid="Base_Column_List" />
+    from menu
+    <trim prefix="WHERE" prefixOverrides="AND" >
+      <include refid="sql_condition" />
+    </trim>
+  </select>
 </mapper>

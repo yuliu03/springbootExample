@@ -7,4 +7,8 @@
 una referencia apuntada a la direccion de la clase java
 
 4. OPTION es un prepedido de post o get para la connction.
-5. el tipo de dato que se envia desde web afecta a los parametros de las funciones de controller nivel, no se evita con el nivel de interceptor
+5. el tipo de dato que se envia desde web afecta a los parametros de las funciones en la capa de controller, no se evita con el nivel de interceptor
+
+6. cuando se requiere recibir un objeto indefinido, se puede usar "@RequestBody Map<String,Object> record" , es un tipo muy potente
+
+7. al borrar las classes, deben borrarlo independientemente, asi que cuando se regeneran, no hace falta añadir las referencias de nuevo

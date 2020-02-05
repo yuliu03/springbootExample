@@ -42,11 +42,16 @@ class MenuServiceImpl implements MenuService {
 
     public APIResponse selectList(Menu record) {
         APIResponse apiResponse = new APIResponse();
+        return apiResponse;
+    }
+
+    public APIResponse selectListRecursive(Menu record) {
+        APIResponse apiResponse = new APIResponse();
         List<MenuJsonBean> menuJsonBeanList = new ArrayList<MenuJsonBean>();
         MenuJsonBean subMenuListCondition = new MenuJsonBean();
         //////
         //如果为空，返回所有菜单
-        if (record.getUuid() == null){
+        if (record == null || record.getUuid() == null){
             //设置条件
             subMenuListCondition.setPid("0");
             //递归获取子集菜单
@@ -74,7 +79,7 @@ class MenuServiceImpl implements MenuService {
     }
 
     private void getSubMenuList( List<MenuJsonBean> menuJsonBeanList,MenuJsonBean subMenuListCondition) {
-        List<MenuJsonBean> list = menuMapperExt.selectList(subMenuListCondition); //获取所有下一集级菜单
+        List<MenuJsonBean> list = menuMapperExt.selectListRecursive(subMenuListCondition); //获取所有下一集级菜单
         for (Menu menu : list){
 //            MenuJsonBean menuJsonBean = new MenuJsonBean();
 //            menuJsonBean.setPid(menu.getUuid());
@@ -89,7 +94,7 @@ class MenuServiceImpl implements MenuService {
             }else {
                 MenuJsonBean subMenuListCondition = new MenuJsonBean();
                 subMenuListCondition.setPid(record.getUuid());
-                List<MenuJsonBean> children = menuMapperExt.selectList(subMenuListCondition);
+                List<MenuJsonBean> children = menuMapperExt.selectListRecursive(subMenuListCondition);
                 for (Menu menu: children){
                     MenuJsonBean menuJsonBean = (MenuJsonBean) menu;
                     record.append(auxSubMenuList(menuJsonBean));

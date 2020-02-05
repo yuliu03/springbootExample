@@ -14,8 +14,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(timeInteceptor).addPathPatterns("/**")
-                .excludePathPatterns("/User/login").excludePathPatterns("/Menu/selectList")
-                .excludePathPatterns("/User/selectList");
+                .excludePathPatterns("/Menu/*")
+                .excludePathPatterns("/User/*")
+                .excludePathPatterns("/Excel/upload");
     }
 
     /*

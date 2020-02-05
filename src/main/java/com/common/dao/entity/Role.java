@@ -1,9 +1,10 @@
 package com.common.dao.entity;
 
+import com.common.dao.baseDomain.Domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Role {
+public class Role extends Domain {
     private String uuid;
 
     private String roleId;
@@ -22,7 +23,7 @@ public class Role {
 
     private BigDecimal version;
 
-    private Boolean isDel;
+    private Byte isDel;
 
     private String ext;
 
@@ -98,11 +99,11 @@ public class Role {
         this.version = version;
     }
 
-    public Boolean getIsDel() {
+    public Byte getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(Boolean isDel) {
+    public void setIsDel(Byte isDel) {
         this.isDel = isDel;
     }
 

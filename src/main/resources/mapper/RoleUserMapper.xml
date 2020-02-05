@@ -11,14 +11,14 @@
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="version" property="version" jdbcType="DECIMAL" />
-    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
-    <result column="is_del" property="isDel" jdbcType="BIT" />
-    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="TINYINT" />
     <result column="ext" property="ext" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     uuid, user_role_id, user_role_name, created_by, updated_time, updated_by, created_time, 
-    remark, version, role_id, is_del, user_id, ext
+    remark, version, is_del, ext, role_id, user_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -34,13 +34,13 @@
     insert into role_user (uuid, user_role_id, user_role_name, 
       created_by, updated_time, updated_by, 
       created_time, remark, version, 
-      role_id, is_del, user_id, 
-      ext)
+      is_del, ext, role_id, 
+      user_id)
     values (#{uuid,jdbcType=VARCHAR}, #{userRoleId,jdbcType=VARCHAR}, #{userRoleName,jdbcType=VARCHAR}, 
       #{createdBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, 
       #{createdTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{version,jdbcType=DECIMAL}, 
-      #{roleId,jdbcType=VARCHAR}, #{isDel,jdbcType=BIT}, #{userId,jdbcType=VARCHAR}, 
-      #{ext,jdbcType=VARCHAR})
+      #{isDel,jdbcType=TINYINT}, #{ext,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.common.dao.entity.RoleUser" >
     insert into role_user
@@ -72,17 +72,17 @@
       <if test="version != null" >
         version,
       </if>
-      <if test="roleId != null" >
-        role_id,
-      </if>
       <if test="isDel != null" >
         is_del,
       </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
       <if test="ext != null" >
         ext,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -113,17 +113,17 @@
       <if test="version != null" >
         #{version,jdbcType=DECIMAL},
       </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=VARCHAR},
-      </if>
       <if test="isDel != null" >
-        #{isDel,jdbcType=BIT},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=VARCHAR},
+        #{isDel,jdbcType=TINYINT},
       </if>
       <if test="ext != null" >
         #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -154,17 +154,17 @@
       <if test="version != null" >
         version = #{version,jdbcType=DECIMAL},
       </if>
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=VARCHAR},
-      </if>
       <if test="isDel != null" >
-        is_del = #{isDel,jdbcType=BIT},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=VARCHAR},
+        is_del = #{isDel,jdbcType=TINYINT},
       </if>
       <if test="ext != null" >
         ext = #{ext,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
@@ -179,10 +179,10 @@
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR},
       version = #{version,jdbcType=DECIMAL},
+      is_del = #{isDel,jdbcType=TINYINT},
+      ext = #{ext,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=BIT},
-      user_id = #{userId,jdbcType=VARCHAR},
-      ext = #{ext,jdbcType=VARCHAR}
+      user_id = #{userId,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
 </mapper>
