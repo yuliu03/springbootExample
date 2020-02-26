@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -46,6 +47,7 @@ class MenuServiceImpl implements MenuService {
     }
 
     public APIResponse selectListRecursive(Menu record) {
+
         APIResponse apiResponse = new APIResponse();
         List<MenuJsonBean> menuJsonBeanList = new ArrayList<MenuJsonBean>();
         MenuJsonBean subMenuListCondition = new MenuJsonBean();
@@ -84,6 +86,7 @@ class MenuServiceImpl implements MenuService {
 //            MenuJsonBean menuJsonBean = new MenuJsonBean();
 //            menuJsonBean.setPid(menu.getUuid());
             MenuJsonBean menuJsonBean = (MenuJsonBean)menu;
+
             menuJsonBeanList.add(auxSubMenuList(menuJsonBean));
         }
     }

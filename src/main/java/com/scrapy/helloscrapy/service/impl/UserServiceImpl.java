@@ -2,8 +2,6 @@ package com.scrapy.helloscrapy.service.impl;
 import com.common.dao.entity.User;
 import com.common.dao.entity.entityJsonBean.SessionUserJsonBean;
 import com.common.dao.mapper.UserMapperExt;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.scrapy.helloscrapy.common.APIResponse;
 import com.scrapy.helloscrapy.common.GlobalConfigParam;
 import com.scrapy.helloscrapy.common.RedisUtil;
@@ -11,6 +9,8 @@ import com.scrapy.helloscrapy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +29,17 @@ class UserServiceImpl implements UserService {
     }
 
     public APIResponse insert(User record) {
+        if(record.getUuid() == null || record.getUuid().equals("")){
+            String uuid = UUID.randomUUID().toString();
+            record.setUuid(uuid);
+        }
+
         APIResponse apiResponse = new APIResponse();
+        if(userMapperExt.insert(record) > 0){
+            apiResponse.setCode(APIResponse.SUCCESS);
+        }else{
+            apiResponse.setCode(APIResponse.FAIL);
+        }
         return apiResponse;
     }
 
@@ -56,8 +66,6 @@ class UserServiceImpl implements UserService {
     public APIResponse selectList(User record) {
         APIResponse apiResponse = new APIResponse();
         //排序实现: 数据库字段 + " desc" 或 数据库字段 + " asc"
-        //PageHelper.startPage(1, 10, "create_time desc");
-        //PageHelper.startPage(record.getPageNum(), record.getPageSize(),"create_time desc");
         int startPage = record.getPageNum();
         int pageSize = record.getPageSize();
 

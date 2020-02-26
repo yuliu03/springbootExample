@@ -30,13 +30,13 @@
     <if test="version != null and version != '' " >
       and version= #{version,jdbcType = DECIMAL}
     </if>
-    <if test="isDel != null and isDel != '' " >
+    <if test="isDel != null " >
       and is_del= #{isDel,jdbcType = TINYINT}
     </if>
     <if test="pid != null and pid != '' " >
       and pid= #{pid,jdbcType = VARCHAR}
     </if>
-    <if test="isLeaf != null and isLeaf != '' " >
+    <if test="isLeaf != null " >
       and is_leaf= #{isLeaf,jdbcType = BIT}
     </if>
     <if test="fileUrl != null and fileUrl != '' " >
@@ -58,6 +58,7 @@
     </trim>
   </select>
 
+  <!--以下为后期加入，非自动生成-->
   <resultMap id="ResultMapExt" type="com.common.dao.entity.entityJsonBean.MenuJsonBean" extends="BaseResultMap">
   </resultMap>
 
@@ -68,5 +69,6 @@
     <trim prefix="WHERE" prefixOverrides="AND" >
       <include refid="sql_condition" />
     </trim>
+    order by sort asc
   </select>
 </mapper>

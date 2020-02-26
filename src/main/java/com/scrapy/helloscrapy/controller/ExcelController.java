@@ -1,5 +1,6 @@
 package com.scrapy.helloscrapy.controller;
 
+import com.scrapy.helloscrapy.common.APIResponse;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -9,22 +10,27 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping(value ="/Excel/")
+@RequestMapping(value ="/excel/")
 public class ExcelController {
     private final static String EXCEL_2003_DOWN = ".xls"; // 2003- 版本的excel
     private final static String EXCEL_2007_UP = ".xlsx"; // 2007+ 版本的excel
 
-    @RequestMapping(value = "upload",method = RequestMethod.POST)
+    @RequestMapping(value = "file",method = RequestMethod.POST)
     @ResponseBody
-    public List<Object> fileUpload(@RequestParam("file") MultipartFile file){
+    public APIResponse fileUpload(@RequestParam(value = "file", required = false) MultipartFile file){
         String fileName = file.getOriginalFilename();
+        System.out.println(fileName);
+        APIResponse apiResponse = new APIResponse<>();
         try {
             InputStream in = file.getInputStream();
             ArrayList<Object> listToReturn = new ArrayList<Object>();
@@ -50,15 +56,19 @@ public class ExcelController {
                     }
                 }
             }
-            return listToReturn;
+            apiResponse.setMessage("上传成功");
+            apiResponse.setData(listToReturn);
+            apiResponse.setCode(APIResponse.SUCCESS);
+            return apiResponse;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        apiResponse.setCode(APIResponse.FAIL);
+        return apiResponse;
     }
 
 
-    public Workbook getWorkbook(InputStream inStr, String fileName) throws Exception {
+    private Workbook getWorkbook(InputStream inStr, String fileName) throws Exception {
         Workbook wb = null;
         String fileType = fileName.substring(fileName.lastIndexOf("."));
         if (EXCEL_2003_DOWN.equals(fileType)) {
@@ -67,6 +77,23 @@ public class ExcelController {
             wb = new XSSFWorkbook(inStr); //2007+
         }
         return wb;
+    }
+
+    /*
+     * excel 内容上传
+     */
+    @RequestMapping(value = "info",method = RequestMethod.POST)
+    public APIResponse fileUploadInfo(HttpServletRequest request, HttpSession session, @RequestBody List<Object> record) {
+        APIResponse apiResponse = new APIResponse<>();
+        if (record == null || record.isEmpty()){
+            apiResponse.setCode(APIResponse.NOT_INITIALIZED);
+        }else{
+            apiResponse.setMessage("上传成功");
+            apiResponse.setCode(APIResponse.SUCCESS);
+            return apiResponse;
+        }
+
+        return apiResponse;
     }
 
     private Object getCellValue(Cell cell) {

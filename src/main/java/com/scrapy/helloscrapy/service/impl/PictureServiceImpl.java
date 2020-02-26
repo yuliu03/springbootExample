@@ -1,10 +1,10 @@
 package com.scrapy.helloscrapy.service.impl;
-import com.common.dao.entity.Test;
-import com.common.dao.mapper.TestMapperExt;
+import com.common.dao.entity.Picture;
+import com.common.dao.mapper.PictureMapperExt;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.scrapy.helloscrapy.common.APIResponse;
-import com.scrapy.helloscrapy.service.TestService;
+import com.scrapy.helloscrapy.service.PictureService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-class TestServiceImpl implements TestService {
+class PictureServiceImpl implements PictureService {
     @Autowired
-    public TestMapperExt testMapperExt;
+    public PictureMapperExt pictureMapperExt;
 
-    public APIResponse deleteByPrimaryKey(Test record) {
+
+
+    public APIResponse deleteByPrimaryKey(Picture record) {
         APIResponse apiResponse = new APIResponse();
-        if(testMapperExt.updateByPrimaryKeySelective(record) > 0){
+        if(pictureMapperExt.updateByPrimaryKeySelective(record) > 0){
                 apiResponse.setCode(APIResponse.SUCCESS);
         }else{
                 apiResponse.setCode(APIResponse.FAIL);
@@ -27,13 +29,13 @@ class TestServiceImpl implements TestService {
         return apiResponse;
     }
 
-    public APIResponse insert(Test record) {
+    public APIResponse insert(Picture record) {
         APIResponse apiResponse = new APIResponse();
-        if(record.getUuid() != null || record.getUuid().equals("")){
+       if(record.getUuid() == null || record.getUuid().equals("")){
             String uuid = UUID.randomUUID().toString();
             record.setUuid(uuid);
         }
-        if(testMapperExt.insert(record) > 0){
+        if(pictureMapperExt.insert(record) > 0){
                 apiResponse.setCode(APIResponse.SUCCESS);
         }else{
                 apiResponse.setCode(APIResponse.FAIL);
@@ -41,9 +43,9 @@ class TestServiceImpl implements TestService {
         return apiResponse;
     }
 
-    public APIResponse selectByPrimaryKey(Test record) {
+    public APIResponse selectByPrimaryKey(Picture record) {
         APIResponse apiResponse = new APIResponse();
-        Test data = testMapperExt.selectByPrimaryKey(record.getUuid());
+        Picture data = pictureMapperExt.selectByPrimaryKey(record.getUuid());
          if(data != null){
                 apiResponse.setData(data);
                 apiResponse.setCode(APIResponse.SUCCESS);
@@ -53,9 +55,9 @@ class TestServiceImpl implements TestService {
          return apiResponse;
     }
 
-    public APIResponse updateByPrimaryKeySelective(Test record) {
+    public APIResponse updateByPrimaryKeySelective(Picture record) {
         APIResponse apiResponse = new APIResponse();
-        if(testMapperExt.updateByPrimaryKeySelective(record) > 0){
+        if(pictureMapperExt.updateByPrimaryKeySelective(record) > 0){
                 apiResponse.setCode(APIResponse.SUCCESS);
         }else{
                 apiResponse.setCode(APIResponse.FAIL);
@@ -63,9 +65,9 @@ class TestServiceImpl implements TestService {
         return apiResponse;
     }
 
-    public APIResponse updateByPrimaryKey(Test record) {
+    public APIResponse updateByPrimaryKey(Picture record) {
         APIResponse apiResponse = new APIResponse();
-        if(testMapperExt.updateByPrimaryKeySelective(record) > 0){
+        if(pictureMapperExt.updateByPrimaryKeySelective(record) > 0){
                 apiResponse.setCode(APIResponse.SUCCESS);
         }else{
                 apiResponse.setCode(APIResponse.FAIL);
@@ -73,14 +75,13 @@ class TestServiceImpl implements TestService {
         return apiResponse;
     }
 
-    public APIResponse selectList(Test record) {
+    public APIResponse selectList(Picture record) {
         APIResponse apiResponse = new APIResponse();
        int startPage = record.getPageNum();
        int pageSize = record.getPageSize();
-       record.setIsDel((byte) 0);
        PageHelper.startPage(startPage, pageSize);
-       List<Test> tmpList= testMapperExt.selectList(record);
-       PageInfo<Test> tmpPageInfo = new PageInfo<Test>(tmpList);
+       List<Picture> tmpList= pictureMapperExt.selectList(record);
+       PageInfo<Picture> tmpPageInfo = new PageInfo<Picture>(tmpList);
        apiResponse.setData(tmpPageInfo);
        apiResponse.setTotal((int) tmpPageInfo.getTotal());
        apiResponse.setCode(APIResponse.SUCCESS);

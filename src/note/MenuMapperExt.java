@@ -8,5 +8,7 @@ import javax.annotation.Resource;
 
 @Resource
 public interface MenuMapperExt extends MenuMapper {
+    List<Menu> selectList(Menu record);
+
     List<MenuJsonBean> selectListRecursive(Menu record);
 }

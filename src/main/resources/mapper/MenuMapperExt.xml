@@ -9,8 +9,14 @@
     <if test="menuId != null and menuId != '' " >
       and menu_id= #{menuId,jdbcType = VARCHAR}
     </if>
+    <if test="pid != null and pid != '' " >
+      and pid= #{pid,jdbcType = VARCHAR}
+    </if>
     <if test="menuName != null and menuName != '' " >
       and menu_name= #{menuName,jdbcType = VARCHAR}
+    </if>
+    <if test="sort != null and sort != '' " >
+      and sort= #{sort,jdbcType = SMALLINT}
     </if>
     <if test="createdBy != null and createdBy != '' " >
       and created_by= #{createdBy,jdbcType = VARCHAR}
@@ -32,9 +38,6 @@
     </if>
     <if test="isDel != null " >
       and is_del= #{isDel,jdbcType = TINYINT}
-    </if>
-    <if test="pid != null and pid != '' " >
-      and pid= #{pid,jdbcType = VARCHAR}
     </if>
     <if test="isLeaf != null " >
       and is_leaf= #{isLeaf,jdbcType = BIT}
@@ -69,5 +72,6 @@
     <trim prefix="WHERE" prefixOverrides="AND" >
       <include refid="sql_condition" />
     </trim>
+    order by sort asc
   </select>
 </mapper>

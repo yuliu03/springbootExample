@@ -9,7 +9,11 @@ public class Menu extends Domain {
 
     private String menuId;
 
+    private String pid;
+
     private String menuName;
+
+    private Short sort;
 
     private String createdBy;
 
@@ -24,8 +28,6 @@ public class Menu extends Domain {
     private BigDecimal version;
 
     private Byte isDel;
-
-    private String pid;
 
     private Boolean isLeaf;
 
@@ -51,12 +53,28 @@ public class Menu extends Domain {
         this.menuId = menuId == null ? null : menuId.trim();
     }
 
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid == null ? null : pid.trim();
+    }
+
     public String getMenuName() {
         return menuName;
     }
 
     public void setMenuName(String menuName) {
         this.menuName = menuName == null ? null : menuName.trim();
+    }
+
+    public Short getSort() {
+        return sort;
+    }
+
+    public void setSort(Short sort) {
+        this.sort = sort;
     }
 
     public String getCreatedBy() {
@@ -113,14 +131,6 @@ public class Menu extends Domain {
 
     public void setIsDel(Byte isDel) {
         this.isDel = isDel;
-    }
-
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid == null ? null : pid.trim();
     }
 
     public Boolean getIsLeaf() {

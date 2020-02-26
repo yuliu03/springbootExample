@@ -32,11 +32,11 @@
             <property name="daoDir" value="com.common.dao.mapper"/>
             <property name="APIResponseDir" value="com.scrapy.helloscrapy.common.APIResponse"/>
             <!--controller层生成-->
-            <!--<property name="controllerPackageDir" value="com.scrapy.helloscrapy.controller"/>-->
+            <property name="controllerPackageDir" value="com.scrapy.helloscrapy.controller"/>
             <!--service interface层生成-->
-            <!--<property name="serviceInterfacePackageDir" value="com.scrapy.helloscrapy.service"/>-->
+            <property name="serviceInterfacePackageDir" value="com.scrapy.helloscrapy.service"/>
             <!--service implement interface层生成-->
-            <!--<property name="serviceImpPackageDir" value="com.scrapy.helloscrapy.service.impl"/>-->
+            <property name="serviceImpPackageDir" value="com.scrapy.helloscrapy.service.impl"/>
         </javaModelGenerator>
         <!-- 生成XML映射文件的包名和位置-->
         <sqlMapGenerator targetPackage="resources.mapper" targetProject="src/main">
@@ -59,8 +59,10 @@
                <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="role_user" domainObjectName="RoleUser" enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
-        <table tableName="test" domainObjectName="Test" enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <!--<table tableName="picture" domainObjectName="Picture" enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="test" domainObjectName="Test" enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
 
     </context>
 </generatorConfiguration>
