@@ -3,6 +3,7 @@ import com.common.dao.entity.Picture;
 import com.scrapy.helloscrapy.common.APIResponse;
 import com.scrapy.helloscrapy.service.PictureService;
 import javax.servlet.http.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ class PictureController {
     @Autowired
     public PictureService pictureService;
 
-    @Value("${file.uploadFolder.img}")
+    @Value("${path.uploadFolder.img}")
     private String imgPath;
 
     @RequestMapping(value = "deleteByPrimaryKey",method = RequestMethod.POST)
@@ -53,56 +54,22 @@ class PictureController {
 
     @RequestMapping(value = "upload_img",method = RequestMethod.POST)
     @ResponseBody
-    public APIResponse upload_img(@RequestParam(value = "pic", required = false) MultipartFile multipartFile, HttpServletResponse response) {
+    public APIResponse upload_img(@RequestParam(value = "pic", required = false) MultipartFile multipartFile) {
         try {
             // 保存图片
-            File file = new File(imgPath + multipartFile.getOriginalFilename());
+            String xImgPath = imgPath + multipartFile.getOriginalFilename();
+            File file = new File(xImgPath);
             multipartFile.transferTo(file);
+            Picture record = new Picture();
+            record.setPictureUrl(xImgPath);
+            return pictureService.insert(record);
         } catch (IOException e) {
             e.printStackTrace();
+            APIResponse apiResponse = new APIResponse<>();
+            apiResponse.setMessage("上传失败");
+            apiResponse.setCode(APIResponse.FAIL);
+            return apiResponse;
         }
 
-
-            // 保存图片
-            APIResponse apiResponse = new APIResponse();
-            String url = imgPath + multipartFile.getOriginalFilename();
-            File file = new File(url);
-            if (file.exists()) {
-                response.setContentType("application/force-download");// 设置强制下载不打开
-                response.addHeader("Content-Disposition",
-                        "attachment;fileName=" +  multipartFile.getOriginalFilename());// 设置文件名
-                byte[] buffer = new byte[1024];
-                FileInputStream fis = null;
-                BufferedInputStream bis = null;
-                try {
-                    fis = new FileInputStream(file);
-                    bis = new BufferedInputStream(fis);
-                    OutputStream os = response.getOutputStream();
-                    int i = bis.read(buffer);
-                    while (i != -1) {
-                        os.write(buffer, 0, i);
-                        i = bis.read(buffer);
-                    }
-                    System.out.println("success");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    if (bis != null) {
-                        try {
-                            bis.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (fis != null) {
-                        try {
-                            fis.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        return null;
     }
 }

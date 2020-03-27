@@ -23,10 +23,10 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成(实体)模型的包名和位置,controller层生成,service层生成-->
-        <javaModelGenerator targetPackage="com.common.dao.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.common.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
-            <property name="rootClass" value="com.common.dao.baseDomain.Domain"/>
+            <property name="rootClass" value="com.common.baseDomain.Domain"/>
 
             <!--controller 和 service 辅助参数-->
             <property name="daoDir" value="com.common.dao.mapper"/>
@@ -63,6 +63,8 @@
         <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="test" domainObjectName="Test" enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="test2" domainObjectName="Test2" enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
 
     </context>
 </generatorConfiguration>

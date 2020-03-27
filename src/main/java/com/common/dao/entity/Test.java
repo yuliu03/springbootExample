@@ -1,6 +1,6 @@
 package com.common.dao.entity;
 
-import com.common.dao.baseDomain.Domain;
+import com.common.baseDomain.Domain;
 
 public class Test extends Domain {
     private String testId;

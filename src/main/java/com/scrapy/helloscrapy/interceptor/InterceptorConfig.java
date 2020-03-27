@@ -14,10 +14,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(timeInteceptor).addPathPatterns("/**")
-                .excludePathPatterns("/Menu/**")
-                .excludePathPatterns("/User/**")
-                .excludePathPatterns("/excel/**")
-                .excludePathPatterns("/Picture/**");
+                .excludePathPatterns("/**");
+//                .excludePathPatterns("/User/**")
+//                .excludePathPatterns("/excel/**")
+//                .excludePathPatterns("/Picture/**");
     }
 
     /*

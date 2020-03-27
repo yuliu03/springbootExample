@@ -62,9 +62,9 @@ public class ExcelController {
             return apiResponse;
         } catch (Exception e) {
             e.printStackTrace();
+            apiResponse.setCode(APIResponse.FAIL);
+            return apiResponse;
         }
-        apiResponse.setCode(APIResponse.FAIL);
-        return apiResponse;
     }
 
 
@@ -86,9 +86,12 @@ public class ExcelController {
     public APIResponse fileUploadInfo(HttpServletRequest request, HttpSession session, @RequestBody List<Object> record) {
         APIResponse apiResponse = new APIResponse<>();
         if (record == null || record.isEmpty()){
-            apiResponse.setCode(APIResponse.NOT_INITIALIZED);
+            apiResponse.setMessage("内容是空");
+            apiResponse.setData(record);
+            apiResponse.setCode(APIResponse.FAIL);
         }else{
             apiResponse.setMessage("上传成功");
+            apiResponse.setData(record);
             apiResponse.setCode(APIResponse.SUCCESS);
             return apiResponse;
         }
@@ -97,32 +100,37 @@ public class ExcelController {
     }
 
     private Object getCellValue(Cell cell) {
-        Object value = null;
-        DecimalFormat df = new DecimalFormat("0"); // 格式化number String字符
-        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd"); // 日期格式化
-        DecimalFormat df2 = new DecimalFormat("0.00"); // 格式化数字
-        switch (cell.getCellType()) {
-            case Cell.CELL_TYPE_STRING:
-                value = cell.getRichStringCellValue().getString();
-                break;
-            case Cell.CELL_TYPE_NUMERIC:
-                if ("General".equals(cell.getCellStyle().getDataFormatString())) {
-                    value = df.format(cell.getNumericCellValue());
-                } else if ("m/d/yy".equals(cell.getCellStyle().getDataFormatString())) {
-                    value = sdf.format(cell.getDateCellValue());
-                } else {
-                    value = df2.format(cell.getNumericCellValue());
-                }
-                break;
-            case Cell.CELL_TYPE_BOOLEAN:
-                value = cell.getBooleanCellValue();
-                break;
-            case Cell.CELL_TYPE_BLANK:
-                value = "";
-                break;
-            default:
-                break;
+        if (cell != null) {
+            Object value = null;
+            DecimalFormat df = new DecimalFormat("0"); // 格式化number String字符
+            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd"); // 日期格式化
+            DecimalFormat df2 = new DecimalFormat("0.00"); // 格式化数字
+            switch (cell.getCellType()) {
+                case Cell.CELL_TYPE_STRING:
+                    value = cell.getRichStringCellValue().getString();
+                    break;
+                case Cell.CELL_TYPE_NUMERIC:
+                    if ("General".equals(cell.getCellStyle().getDataFormatString())) {
+                        value = df.format(cell.getNumericCellValue());
+                    } else if ("m/d/yy".equals(cell.getCellStyle().getDataFormatString())) {
+                        value = sdf.format(cell.getDateCellValue());
+                    } else {
+                        value = df2.format(cell.getNumericCellValue());
+                    }
+                    break;
+                case Cell.CELL_TYPE_BOOLEAN:
+                    value = cell.getBooleanCellValue();
+                    break;
+                case Cell.CELL_TYPE_BLANK:
+                    value = "";
+                    break;
+                default:
+                    break;
+            }
+            return value;
+        }else{
+            return "";
         }
-        return value;
+
     }
 }

@@ -5,9 +5,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.scrapy.helloscrapy.common.APIResponse;
 import com.scrapy.helloscrapy.service.PictureService;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

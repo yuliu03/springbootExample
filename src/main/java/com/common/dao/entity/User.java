@@ -1,6 +1,7 @@
 package com.common.dao.entity;
 
-import com.common.dao.baseDomain.Domain;
+import com.common.baseDomain.Domain;
+
 import java.math.BigDecimal;
 import java.util.Date;
 

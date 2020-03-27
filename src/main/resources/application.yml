@@ -1,7 +1,9 @@
 server:
   port: 8888
+  address: 0.0.0.0
 
-#单个数据的大小
+
+  #单个数据的大小
 #  spring.servlet.multipart.maxFileSize=10Mb
 #  #总数据的大小
 #  spring.servlet.multipart.maxRequestSize=10Mb
@@ -19,6 +21,10 @@ server:
 
 
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
   servlet:
     multipart:
       max-file-size: 20MB
@@ -56,10 +62,15 @@ spring:
         # 连接超时时间（毫秒）
         timeout: 0
 
-file:
+
+path:
   uploadFolder:
     img: D:/liuJavaProject/baseProject/src/localData/
-
+  tmpFile: D:/liuJavaProject/baseProject/src/tmpFile/
+  testSourceFile: D:/liuJavaProject/baseProject/src/tmpFile/test.txt
+  testSourcePath: D:/liuJavaProject/baseProject/src/tmpFile
+  entityPath: D:/liuJavaProject/baseProject/src/main/java/com/common/dao/entity
+  entityJsonPath: D:/liuJavaProject/baseProject/src/main/java/com/common/dao/entity/entityJsonBean
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径

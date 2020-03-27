@@ -1,4 +1,4 @@
-package com.common.dao.baseDomain;
+package com.common.baseDomain;
 
 public abstract class Domain {
    protected int pageNum;

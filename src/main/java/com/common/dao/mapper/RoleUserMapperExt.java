@@ -1,6 +1,7 @@
 package com.common.dao.mapper;
 
 import com.common.dao.entity.RoleUser;
+
 import java.util.List;
 import javax.annotation.Resource;
 
