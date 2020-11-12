@@ -12,3 +12,6 @@ una referencia apuntada a la direccion de la clase java
 6. cuando se requiere recibir un objeto indefinido, se puede usar "@RequestBody Map<String,Object> record" , es un tipo muy potente
 
 7. al borrar las classes, deben borrarlo independientemente, asi que cuando se regeneran, no hace falta añadir las referencias de nuevo
+
+8.descargar excel, hay que cambiar el notacion @RestCotroller por @Controller, porque la primera hace que la respuesta sea forma de json. Si dentro
+hay api necesita dicha forma, con poner la notacion @ResponseBody basta

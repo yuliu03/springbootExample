@@ -45,6 +45,8 @@ spring:
         # 连接超时时间（毫秒）
         timeout: 0
 
+  main:
+      allow-bean-definition-overriding: true
 
 path:
   uploadFolder:
